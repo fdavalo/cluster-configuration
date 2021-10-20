@@ -1,0 +1,13 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  name: local-sdb
+  namespace: openshift-local-storage
+spec:
+  logLevel: Normal
+  managementState: Managed
+  storageClassDevices:
+    - devicePaths:
+        - /dev/sdb
+      storageClassName: local-sdb
+      volumeMode: Block
