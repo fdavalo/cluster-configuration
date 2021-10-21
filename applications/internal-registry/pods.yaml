@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: imageregistry-enable
+  namespace: openshift-machine-config-operator
+spec:
+  serviceAccountName: machine-config-daemon
+  restartPolicy: OnFailure
+  containers:
+        - name: cli
+          image: 'quay.io/openshift/origin-cli'
+          command:
+            - /bin/bash
+            - '-c'
+          args:
+            - >-
+              oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{"spec":{"defaultRoute":true,"managementState":"Managed"}}'
