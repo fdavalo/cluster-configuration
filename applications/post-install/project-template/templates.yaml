@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  creationTimestamp: null
+  namespace: openshift-config
   name: project-request
 objects:
 - apiVersion: project.openshift.io/v1
