@@ -14,3 +14,4 @@ spec:
           args:
             - >-
               oc patch project.config.openshift.io/cluster -p '{"spec":{"projectRequestTemplate":{"name":"project-request"}}}' --type merge
+              sleep 10
