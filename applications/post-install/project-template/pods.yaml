@@ -5,6 +5,7 @@ metadata:
   namespace: openshift-config-operator
 spec:
   serviceAccountName: openshift-config-operator
+  restartPolicy: OnFailure
   containers:
         - name: cli
           image: 'quay.io/openshift/origin-cli'
@@ -14,5 +15,3 @@ spec:
           args:
             - >-
               oc patch project.config.openshift.io/cluster -p '{"spec":{"projectRequestTemplate":{"name":"project-request"}}}' --type merge
-              
-              sleep 10
