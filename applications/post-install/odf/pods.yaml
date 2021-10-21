@@ -6,13 +6,12 @@ metadata:
 spec:
   containers:
         - name: cli
-          image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
+          image: 'quay.io/openshift/origin-cli'
           command:
             - /bin/bash
             - '-c'
           args:
             - >-
               for node in `oc get nodes | grep worker | awk '{print $1;}'`; do 
-
                  oc label node $node cluster.ocs.openshift.io/openshift-storage=""; 
               done
