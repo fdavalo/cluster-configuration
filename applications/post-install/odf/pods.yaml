@@ -5,6 +5,7 @@ metadata:
   namespace: openshift-machine-config-operator
 spec:
   serviceAccountName: machine-config-daemon
+  restartPolicy: OnFailure
   containers:
         - name: cli
           image: 'quay.io/openshift/origin-cli'
