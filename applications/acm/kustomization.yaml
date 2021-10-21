@@ -1,0 +1,5 @@
+resources:
+- operatorgroups.yaml
+- subscriptions.yaml
+- namespace.yaml
+- multiclusterhub.yaml
