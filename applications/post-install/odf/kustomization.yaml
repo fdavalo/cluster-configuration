@@ -3,4 +3,3 @@ resources:
 - subscriptions.yaml
 - namespace.yaml
 - pods.yaml
-- storagecluster.yaml
