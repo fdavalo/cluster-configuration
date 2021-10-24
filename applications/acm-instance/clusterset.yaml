@@ -1,5 +1,5 @@
 apiVersion: cluster.open-cluster-management.io/v1alpha1
 kind: ManagedClusterSet
 metadata:
-  name: bm-dev-cluster
+  name: bm-dev-clusters
 spec: {}
