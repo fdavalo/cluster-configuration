@@ -1,0 +1,11 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: managedclustersets
+rules:
+  - verbs:
+      - create
+    apiGroups:
+      - cluster.open-cluster-management.io
+    resources:
+      - managedclustersets
