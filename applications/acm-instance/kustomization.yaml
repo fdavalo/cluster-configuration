@@ -1,3 +1,5 @@
 resources:
 - multiclusterhub.yaml
 - clusterset.yaml
+- role.yaml
+- rolebinding.yaml
