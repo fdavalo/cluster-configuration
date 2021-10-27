@@ -1,2 +1,4 @@
 resources:
 - applicationset.yaml
+- appproject.yaml
+- gitopscluster.yaml
