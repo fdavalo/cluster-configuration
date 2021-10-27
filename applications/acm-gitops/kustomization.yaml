@@ -3,3 +3,4 @@ resources:
 - appproject.yaml
 - gitopscluster.yaml
 - placement.yaml
+- managedclustersetbinding.yaml
