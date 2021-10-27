@@ -42,7 +42,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: view-cluster-credentials
-  namespace: local-cluster
+  namespace: open-cluster-management
 subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
