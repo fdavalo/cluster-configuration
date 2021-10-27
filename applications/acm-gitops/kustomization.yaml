@@ -2,3 +2,4 @@ resources:
 - applicationset.yaml
 - appproject.yaml
 - gitopscluster.yaml
+- placement.yaml
