@@ -24,3 +24,25 @@ rules:
       - inventory.open-cluster-management.io
     resources:
       - baremetalassets
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: view-cluster-credentials
+  namespace: local-cluster
+rules:
+  - verbs:
+      - watch
+      - list
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - secrets      
+    resourceNames:
+      - vcenter            
