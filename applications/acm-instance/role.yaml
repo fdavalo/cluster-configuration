@@ -29,7 +29,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: view-cluster-credentials
-  namespace: local-cluster
+  namespace: open-cluster-management
 rules:
   - verbs:
       - watch
@@ -38,6 +38,7 @@ rules:
       - ''
     resources:
       - secrets
+      - namespace
   - verbs:
       - get
     apiGroups:
@@ -45,4 +46,5 @@ rules:
     resources:
       - secrets      
     resourceNames:
-      - vcenter            
+      - vcenter
+      - baremetal
