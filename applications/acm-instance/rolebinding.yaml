@@ -10,3 +10,16 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: managedclustersets
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  generateName: bm-dev-clusters-
+subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: hpe_redhat
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'open-cluster-management:managedclusterset:admin:bm-dev-clusters'
