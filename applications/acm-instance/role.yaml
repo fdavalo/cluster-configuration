@@ -48,3 +48,4 @@ rules:
     resourceNames:
       - vcenter
       - baremetal
+      - baremetal-asset-secret
