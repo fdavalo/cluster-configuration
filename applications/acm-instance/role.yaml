@@ -17,9 +17,7 @@ metadata:
   namespace: open-cluster-management
 rules:
   - verbs:
-      - get
-      - watch
-      - list
+      - all
     apiGroups:
       - inventory.open-cluster-management.io
     resources:
