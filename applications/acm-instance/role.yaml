@@ -9,3 +9,18 @@ rules:
       - cluster.open-cluster-management.io
     resources:
       - managedclustersets
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: view-baremetal-assets
+  namespace: open-cluster-management
+rules:
+  - verbs:
+      - get
+      - watch
+      - list
+    apiGroups:
+      - inventory.open-cluster-management.io
+    resources:
+      - baremetalassets
