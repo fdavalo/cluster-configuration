@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: setup-observability
+  namespace: open-cluster-management
+spec:
+  serviceAccountName: cluster-manager
+  restartPolicy: OnFailure
+  containers:
+        - name: cli
+          image: 'quay.io/openshift/origin-cli'
+          command:
+            - /bin/bash
+            - '-c'
+          args:
+            - >-
+              DOCKER_CONFIG_JSON=`oc extract secret/pull-secret -n openshift-config --to=-`
+              oc create secret generic multiclusterhub-operator-pull-secret -n open-cluster-management-observability --from-literal=.dockerconfigjson="$DOCKER_CONFIG_JSON" --type=kubernetes.io/dockerconfigjson
+              export BUCKET_ID=`oc -n open-cluster-management get secret acm-observability -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
+              export BUCKET_SECRET=`oc -n open-cluster-management get secret acm-observability -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
+              export BUCKET_NAME=`oc -n open-cluster-management get obc acm-observability -o jsonpath="{.spec.bucketName}"`
+              envsubst < thanos-storage-secret.yaml | oc apply -f -
+              oc apply -f observability.yaml
