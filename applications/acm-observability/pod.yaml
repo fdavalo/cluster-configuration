@@ -14,6 +14,8 @@ spec:
             - '-c'
       args:
             - >-
+              oc apply -f /etc/config/objectbucketclaim.yaml
+              sleep 10
               DOCKER_CONFIG_JSON=`oc extract secret/pull-secret -n openshift-config --to=-`
               oc create secret generic multiclusterhub-operator-pull-secret -n open-cluster-management-observability --from-literal=.dockerconfigjson="$DOCKER_CONFIG_JSON" --type=kubernetes.io/dockerconfigjson
               export BUCKET_ID=`oc -n open-cluster-management-observability get secret acm-observability -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
