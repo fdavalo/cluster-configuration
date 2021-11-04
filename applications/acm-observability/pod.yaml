@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: setup-observability
-  namespace: open-cluster-management-observability
+  namespace: open-cluster-management
 spec:
   serviceAccountName: cluster-manager
   restartPolicy: OnFailure
