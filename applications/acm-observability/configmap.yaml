@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: observability-config
-  namespace: open-cluster-management-observability
+  namespace: open-cluster-management
 data:
   thanos-object-storage.yaml: |
     apiVersion: v1
