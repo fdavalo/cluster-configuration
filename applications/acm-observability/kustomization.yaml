@@ -1,4 +1,7 @@
 resources:
+ - bucketclaim.yaml
  - namespace.yaml
  - configmap.yaml
+ 
+components:
  - pod.yaml
