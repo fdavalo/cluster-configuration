@@ -18,7 +18,7 @@ spec:
               
               oc create secret generic multiclusterhub-operator-pull-secret -n open-cluster-management-observability --from-literal=.dockerconfigjson="$DOCKER_CONFIG_JSON" --type=kubernetes.io/dockerconfigjson
               
-              oc apply -f /etc/config/objectbucketclaim.yam
+              oc apply -f /etc/config/objectbucketclaim.yaml
               
               while [[ true ]]; do oc -n open-cluster-management-observability get secret acm-observability; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
