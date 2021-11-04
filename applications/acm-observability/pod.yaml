@@ -20,7 +20,7 @@ spec:
               export BUCKET_ID=`oc -n open-cluster-management-observability get secret acm-observability -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
               export BUCKET_SECRET=`oc -n open-cluster-management-observability get secret acm-observability -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
               export BUCKET_NAME=`oc -n open-cluster-management-observability get obc acm-observability -o jsonpath="{.spec.bucketName}"`
-              envsubst < /etc/config/thanos-storage-secret.yaml | oc apply -f -
+              envsubst < /etc/config/thanos-object-secret.yaml | oc apply -f -
               oc apply -f /etc/config/observability.yaml
       volumeMounts:
       - name: config-volume
