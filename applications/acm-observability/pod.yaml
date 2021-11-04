@@ -37,4 +37,4 @@ spec:
   volumes:
     - name: config-volume
       configMap:
-        name: observability-config
+        name: acm-observability-config
