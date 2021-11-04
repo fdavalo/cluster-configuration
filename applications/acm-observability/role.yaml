@@ -1,0 +1,19 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: create-objectbucketclaim
+  namespace: open-cluster-management-observability
+rules:
+  - verbs:
+      - watch
+      - list
+      - get
+      - create
+      - patch
+      - update
+      - delete
+    apiGroups:
+      - 'objectbucket.io'
+    resources:
+      - objectbucketclaims
+      - namespace
