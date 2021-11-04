@@ -1,5 +1,6 @@
 resources:
  - role.yaml
+ - clusterrole.yaml
  - rolebinding.yaml
  - namespace.yaml
  - configmap.yaml
