@@ -27,8 +27,6 @@ spec:
               export BUCKET_NAME=`oc -n open-cluster-management-observability get obc acm-observability -o jsonpath="{.spec.bucketName}"`
               
               sed -e "s/\${BUCKET_NAME}/$BUCKET_NAME/g" -e "s/\${BUCKET_ID}/$BUCKET_ID/g" -e "s/\${BUCKET_SECRET}/$BUCKET_SECRET/g" /etc/config/thanos-object-secret.yaml | oc apply -f -
-              
-              #oc apply -f /etc/config/observability.yaml
       volumeMounts:
       - name: config-volume
         mountPath: /etc/config
