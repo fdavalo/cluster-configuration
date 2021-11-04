@@ -16,3 +16,15 @@ rules:
       - 'objectbucket.io'
     resources:
       - objectbucketclaims
+  - verbs:
+      - watch
+      - list
+      - get
+      - create
+      - patch
+      - update
+      - delete
+    apiGroups:
+      - ''
+    resources:
+      - secrets
