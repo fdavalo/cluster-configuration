@@ -4,7 +4,7 @@ metadata:
   name: observability-config
   namespace: open-cluster-management
 data:
-  thanos-object-storage.yaml: |
+  thanos-object-secret.yaml: |
     apiVersion: v1
     kind: Secret
     metadata:
@@ -30,4 +30,13 @@ data:
       storageConfig:
         metricObjectStorage:
           name: thanos-object-storage
-          key: thanos.yaml   
+          key: thanos.yaml
+  objectbucketclaim.yaml: |
+    apiVersion: objectbucket.io/v1alpha1
+    kind: ObjectBucketClaim
+    metadata:
+      name: acm-observability
+      namespace: open-cluster-management-observability
+    spec:
+      generateBucketName: acm-observability
+      storageClassName: ocs-storagecluster-ceph-rgw
