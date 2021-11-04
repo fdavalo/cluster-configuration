@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: observability-config
-  namespace: open-cluster-management
+  name: acm-observability-config
+  namespace: openshift-gitops
 data:
   thanos-object-secret.yaml: |
     apiVersion: v1
