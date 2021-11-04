@@ -16,4 +16,21 @@ rules:
       - 'objectbucket.io'
     resources:
       - objectbucketclaims
-      - namespace
+---      
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: create-multiclusterobservabilities
+rules:      
+  - verbs:
+      - watch
+      - list
+      - get
+      - create
+      - patch
+      - update
+      - delete
+    apiGroups:
+      - 'observability.open-cluster-management.io'
+    resources:
+      - multiclusterobservabilities
