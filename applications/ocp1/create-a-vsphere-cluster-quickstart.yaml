@@ -1,0 +1,119 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleQuickStart
+metadata:
+  name: create-a-vsphere-cluster
+spec:
+  conclusion: You have now a new Openshift cluster running on vsphere.
+  description: Create an Openshit vsphere cluster with ACM.
+  displayName: Create an Openshift vsphere cluster with ACM
+  durationMinutes: 30
+  introduction: >-
+    ### This quick start shows you how to add a new Openshift cluster running on
+    vsphere, using ACM. 
+
+    ####ACM operator has already been installed and configured on this cluster.  
+
+    ####A vsphere provider has already been created on ACM with all needed vsphere
+    parameters (login, vsphere url, data store, ...).
+  tasks:
+    - description: >-
+        To connect to ACM console :
+
+        1. In the navigation menu, click **Network** then **Route** and select project **open cluster management**.
+
+        2. Click on **Location** url for **multicloud-console** item.
+
+        3. On the ACM console, log in as rh/hpe_redhat.
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: |-
+          #### To verify you are viewing the ACM console:
+          Is the main panel titled **Welcome! Let’s get started.**?
+      summary:
+        failed: Try the steps again.
+        success: You have logged in ACM console!
+      title: Connect to ACM console
+    - description: >-
+        To decide on your cluster name :
+
+        1. On ACM console, in the navigation menu, click **Infrastructure** then
+        **Clusters**.
+
+        2. Check wich cluters named **vc(x)** are already provisionned.
+
+        3. Define as your cluster name, the next name available: (ex vc1 if no
+        vc(x) clusters found, vc2 if vc1 only existing, etc).
+
+        4. Launch in a new window url
+        **http://cluster-ip.redhat.hpecic.net/index.html**.
+
+        5. If you do not find your cluster IPs in this window, enter your
+        cluster name in **Add the cluster** input and click the button.
+
+        6. Now you should have found your cluster name and your associated
+        cluster IPs to use later.
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: >-
+          #### You have a cluster name that is not already provisionned and the
+          associated IPs?
+      summary:
+        failed: Try the steps again.
+        success: You are ready to create your cluster with pre-requisite information!
+      title: Define cluster name and find API and Ingress VIPs
+    - description: >-
+        ### To create an Openshift cluster running on vsphere, go back to ACM
+        console:
+
+        1. In the navigation menu, click **Infrastructure** then **Clusters**.
+
+        2. Click on cluster panel on **Create cluster** button.
+
+        3. Select **Infrastructure provider** = **VMWare vSphere**.
+
+        4. On **Infrastructure provider credential** dropdown list, select
+        **vcenter**.
+
+        5. Click on **Next** button.
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: '#### Verify now that you are on **Cluster details** panel.'
+      summary:
+        failed: Try the steps again.
+        success: You have verified that you are on **Cluster details** panel!
+      title: Add an Openshift cluster on vsphere
+    - description: >-
+        ### Configure your cluster:
+
+        1. Enter your cluster name as decided upon on Step 2 (ex: vc1).
+
+        2. Select a **Release image** in dropdown menu (choose latest unless you
+        want to test updating a cluster for next demo).
+
+        3. Click now on **Networks** panel (left menu) unless you want to review
+        **Master node** and **Worker pools** panels.
+
+        4. Enter **"1082"** for **vSphere network
+        name**.
+
+        5. Enter proper IP for **API VIP** as found on Step 2 (ex: 10.6.82.12
+        for vc1).
+
+        6. Enter proper IP for **Ingress VIP** as found on Step 2 (ex:
+        10.6.82.13 for vc1).
+
+        7. Click now on **Review** panel (left menu) unless you want to review
+        **Automation** panel.
+
+        8. Then Click on **Create** button.
+
+        A popup will tell you the creation of the cluster has been started.
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: >-
+          #### Verify that **Create** button was highlighted and creation
+          started
+      summary:
+        failed: Try the steps again.
+        success: You have started the creation of an Openshift cluster on vsphere!
+      title: Configure your cluster and start its creation.
