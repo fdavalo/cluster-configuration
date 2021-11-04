@@ -1,4 +1,6 @@
 resources:
+ - role.yaml
+ - rolebinding.yaml
  - bucketclaim.yaml
  - namespace.yaml
  - configmap.yaml
