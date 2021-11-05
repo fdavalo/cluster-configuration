@@ -93,7 +93,7 @@ spec:
         3. Click now on **Networks** panel (left menu) unless you want to review
         **Master node** and **Worker pools** panels.
 
-        4. Enter **"1082"** for **vSphere network
+        4. Enter **Openshift** for **vSphere network
         name**.
 
         5. Enter proper IP for **API VIP** as found on Step 2 (ex: 10.6.82.12
