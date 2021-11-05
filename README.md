@@ -10,4 +10,6 @@ under directory applications, you can find a directory for each components of de
    - acm : install Advanced Cluster Management operator
    - acm-instance: instanciate ACM
    - acm-gitops: adds applicationset, clusterset, rbac to allow argoCD to use ACM
+   - am-observability: configure observability for ACM using an ODF bucket
+   - pipelines: install Pipeline operator
    - post-installs: directory used by an ArgoCD ApplicationSet (and linked to an ACM ClusterSet), see acm-gitops
