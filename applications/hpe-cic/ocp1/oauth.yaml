@@ -1,0 +1,16 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - gitlab:
+        ca:
+          name: gitlab-ca-jf92r
+        clientID: e2aa489bf6ec03415efb350f58f5065d4eb91699ab6237ee43e31be7a022b691
+        clientSecret:
+          name: gitlab-client-secret-h5jc7
+        url: 'https://gitlab.hpintelco.org'
+      mappingMethod: claim
+      name: gitlab
+      type: GitLab
