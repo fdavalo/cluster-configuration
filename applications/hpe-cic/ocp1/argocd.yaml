@@ -55,14 +55,9 @@ spec:
     policy: >
       g, system:cluster-admins, role:admin
 
-      p, role:demo-users, applications, *, */*, allow
+      p, role:demo-users, applications, *, demos-project/*, allow
 
-      p, role:demo-users, clusters, get, bm*, allow
-
-      p, role:demo-users, clusters, get, vc*, allow
-
-      p, role:demo-users, repositories, *,
-      https://gitlab.hpintelco.org/redhat/pacman.git, allow
+      p, role:demo-users, repositories, *, *, allow      
 
       g, demo-users, role:demo-users      
     scopes: '[groups]'
