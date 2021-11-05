@@ -17,4 +17,4 @@ under directory applications, you can find a directory for each components of de
        - odf
        - lso-instance
        - odf-instance
-       - 
+       - project-template: default project settings
