@@ -13,3 +13,8 @@ under directory applications, you can find a directory for each components of de
    - am-observability: configure observability for ACM using an ODF bucket
    - pipelines: install Pipeline operator
    - post-installs: directory used by an ArgoCD ApplicationSet (and linked to an ACM ClusterSet), see acm-gitops
+       - lso
+       - odf
+       - lso-instance
+       - odf-instance
+       - 
