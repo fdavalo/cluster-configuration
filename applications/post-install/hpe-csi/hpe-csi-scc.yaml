@@ -1,0 +1,34 @@
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: hpe-csi-scc
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegeEscalation: true
+allowPrivilegedContainer: true
+allowedCapabilities:
+- '*'
+defaultAddCapabilities: []
+fsGroup:
+  type: RunAsAny
+groups: []
+priority:
+readOnlyRootFilesystem: false
+requiredDropCapabilities: []
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+- system:serviceaccount:hpe-csi-driver:hpe-csi-controller-sa
+- system:serviceaccount:hpe-csi-driver:hpe-csi-node-sa
+- system:serviceaccount:hpe-csi-driver:hpe-csp-sa
+- system:serviceaccount:hpe-csi-driver:hpe-csi-operator-sa
+- system:serviceaccount:hpe-nfs:hpe-csi-nfs-sa
+volumes:
+- '*'

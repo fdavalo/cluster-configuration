@@ -1,0 +1,5 @@
+resources:
+- hpe-csi-scc.yaml
+- operatorgroups.yaml
+- subscriptions.yaml
+- namespace.yaml

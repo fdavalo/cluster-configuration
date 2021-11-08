@@ -18,3 +18,5 @@ under directory applications, you can find a directory for each components of de
        - lso-instance
        - odf-instance
        - project-template: default project settings
+       - HPE CSI operator installation
+       - HPE CSP instance creation
