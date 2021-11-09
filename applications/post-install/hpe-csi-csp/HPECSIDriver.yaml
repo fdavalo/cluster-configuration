@@ -4,10 +4,18 @@ metadata:
   name: csi-driver
   namespace: hpe-csi-driver
 spec:
-  disableNodeConformance: false
-  imagePullPolicy: IfNotPresent
-  iscsi:
-    chapPassword: ""
-    chapUser: ""
   logLevel: info
-  registry: "quay.io"
+  disable:
+    alletra6000: false
+    alletra9000: false
+    nimble: false
+    primera: false
+  disableNodeConformance: false
+  iscsi:
+    chapPassword: ''
+    chapUser: ''
+  imagePullPolicy: IfNotPresent
+  cspClientTimeout: 60
+  disableNodeGetVolumeStats: false
+  registry: quay.io
+  kubeletRootDir: /var/lib/kubelet/
