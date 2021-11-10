@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: default-sc
+  name: set-default-sc
   namespace: openshift-storage
 spec:
-  serviceAccountName: openshift-config-operator
+  serviceAccountName: ocs-operator
   restartPolicy: OnFailure
   containers:
         - name: cli
