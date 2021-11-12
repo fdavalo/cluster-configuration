@@ -1,3 +1,5 @@
 resources:
 - HPECSIDriver.yaml
+- role.yaml
+- rolebinding.yaml
 
