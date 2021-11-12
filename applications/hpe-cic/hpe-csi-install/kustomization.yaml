@@ -1,0 +1,7 @@
+resources:
+ - role.yaml
+ - rolebinding.yaml
+ - ../post-install/hpe-csi/hpe-csi-scc.yaml
+ - ../post-install/hpe-csi/operatorgroups.yaml
+ - ../post-install/hpe-csi/subscriptions.yaml
+ - ../post-install/hpe-csi/namespace.yaml
