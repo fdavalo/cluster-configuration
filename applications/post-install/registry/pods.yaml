@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: image-registry-setup
+  namespace: openshift-image-registry
+spec:
+  serviceAccountName: configs.imageregistry.operator.openshift.io
+  restartPolicy: OnFailure
+  containers:
+        - name: cli
+          image: 'quay.io/openshift/origin-cli'
+          command:
+            - /bin/bash
+            - '-c'
+          args:
+            - >-
+              oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim":""}},"managementState":"Managed"}}'
