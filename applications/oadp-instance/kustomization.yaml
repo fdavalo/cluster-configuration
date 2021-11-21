@@ -1,0 +1,4 @@
+resources:
+- objectbucketclaim.yaml
+- veleroconfig.yaml
+- pod.yaml
