@@ -14,7 +14,7 @@ spec:
             - '-c'
       args:
             - >- 
-              tail -c /dev/null
+              tail -f /dev/null
             
               while [[ true ]]; do oc -n openshift-oadp get secret oadp-s3-backup-bucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
