@@ -4,7 +4,7 @@ metadata:
   name: setup-bucket-credentials
   namespace: openshift-oadp
 spec:
-  serviceAccountName: openshift-gitops-argocd-application-controller
+  serviceAccountName: oadp-operator
   restartPolicy: OnFailure
   containers:
     - name: cli
