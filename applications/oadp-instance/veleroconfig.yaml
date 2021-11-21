@@ -7,7 +7,7 @@ spec:
   backupStorageLocations:
   - config:
       insecureSkipTLSVerify: "true"
-      profile: nooba
+      profile: bucket
       region: us-east-1
       s3ForcePathStyle: "true"
       s3Url: https://s3.openshift-storage.svc
@@ -39,7 +39,7 @@ spec:
   velero_feature_flags: EnableCSI
   volume_snapshot_locations:
   - config:
-      profile: nooba
+      profile: bucket
       region: us-east-1
     credential:
       key: cloud
