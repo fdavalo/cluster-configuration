@@ -15,7 +15,7 @@ spec:
       key: cloud
       name: nooba-credentials
     credentials_secret_ref:
-      name: oadp-s3-backup-bucket
+      name: oadp-s3-backup-bucket-velero
       namespace: oadp-operator
     default: true
     name: oadp-s3-backup-bucket
@@ -45,7 +45,7 @@ spec:
       key: cloud
       name: nooba-credentials
     credentials_secret_ref:
-      name: oadp-s3-backup-bucket
+      name: oadp-s3-backup-bucket-velero
       namespace: oadp-operator
     default: true
     name: oadp-s3-backup-bucket
