@@ -1,9 +1,9 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: oadp-
-  namespace: open-cluster-management-observability
+  name: oadp-s3-backup-bucket
+  namespace: openshift-oadp
 spec:
-  bucketName: acm-observability-cc2f15b9-79f1-4802-a562-745285252f1d
-  objectBucketName: obc-open-cluster-management-observability-acm-observability
+  bucketName: oadp-s3-backup-bucket
+  objectBucketName: oadp-s3-backup-bucket
   storageClassName: ocs-storagecluster-ceph-rgw
