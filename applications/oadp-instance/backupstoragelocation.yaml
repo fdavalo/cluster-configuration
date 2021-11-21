@@ -1,0 +1,17 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: oadp-s3-backup-nooba
+  namespace: oadp-operator
+spec:
+  accessMode: ReadWrite
+  config:
+    insecureSkipTLSVerify: "true"
+    profile: bucket
+    region: us-east-1
+    s3ForcePathStyle: "true"
+    s3Url: https://s3.openshift-storage.svc
+  objectStorage:
+    bucket: oadp-s3-backup-bucket
+    prefix: velero
+  provider: aws
