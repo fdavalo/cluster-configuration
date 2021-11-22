@@ -21,10 +21,8 @@ spec:
               export BUCKET_ID=`oc -n openshift-oadp get secret oadp-s3-backup-bucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
               
               export BUCKET_SECRET=`oc -n openshift-oadp get secret oadp-s3-backup-bucket -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
-              
-              export cloud="[bucket]\naws_access_key_id=$BUCKET_ID\naws_secret_access_key=$BUCKET_SECRET"
-              
-              export cloud64=`echo -n "$cloud" | base64`
+                            
+              export cloud64=`echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }' | base64 -w 0`
 
               oc create secret generic oadp-s3-backup-bucket-velero --from-literal=cloud=$cloud64 -n openshift-oadp
 
