@@ -10,7 +10,7 @@ spec:
         profile: nooba
         region: us-east-1
         s3ForcePathStyle: 'true'
-        s3Url: 's3.openshift-storage.svc:443'
+        s3Url: 'https://s3.openshift-storage.svc:443'
       credential:
         key: cloud
         name: oadp-s3-backup-bucket-nooba-velero
