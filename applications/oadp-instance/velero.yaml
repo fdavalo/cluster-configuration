@@ -10,7 +10,7 @@ spec:
         profile: bucket
         region: us-east-1
         s3ForcePathStyle: 'true'
-        s3Url: 'https://s3.openshift-storage.svc'
+        s3Url: 'http://rook-ceph-rgw-ocs-storagecluster-cephobjectstore.openshift-storage.svc:80'
       credential:
         key: cloud
         name: oadp-s3-backup-bucket-velero
