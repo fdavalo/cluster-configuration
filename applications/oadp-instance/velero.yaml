@@ -34,8 +34,11 @@ spec:
       provider: aws      
   defaultVeleroPlugins:
     - aws
+    - csi
+    - openshift
   enableRestic: true
-  noobaa: true
+  veleroFeatureFlags:
+    - EnableCSI
   volumeSnapshotLocations:
     - config:
         profile: rgw
