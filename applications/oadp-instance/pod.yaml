@@ -14,6 +14,8 @@ spec:
             - '-c'
       args:
             - >-             
+              set -x
+              
               while [[ true ]]; do oc -n openshift-oadp get secret oadp-s3-backup-bucket-rgw; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
               export BUCKET_ID=`oc -n openshift-oadp get secret oadp-s3-backup-bucket-rgw -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
