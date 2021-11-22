@@ -14,25 +14,23 @@ spec:
             - '-c'
       args:
             - >-             
-              set -x
-              
               while [[ true ]]; do oc -n openshift-oadp get secret oadp-s3-backup-bucket-rgw; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
               export BUCKET_ID=`oc -n openshift-oadp get secret oadp-s3-backup-bucket-rgw -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
               
               export BUCKET_SECRET=`oc -n openshift-oadp get secret oadp-s3-backup-bucket-rgw -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
-                            
-              echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }'` > /tmp/cloud-rgw
+
+              echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }' > /tmp/cloud-rgw
 
               oc create secret generic oadp-s3-backup-bucket-rgw-velero --from-file=cloud=/tmp/cloud-rgw -n openshift-oadp
-              
+
               while [[ true ]]; do oc -n openshift-oadp get secret oadp-s3-backup-bucket-nooba; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
-              
+
               export BUCKET_ID=`oc -n openshift-oadp get secret oadp-s3-backup-bucket-nooba -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
-              
+
               export BUCKET_SECRET=`oc -n openshift-oadp get secret oadp-s3-backup-bucket-nooba -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
-                            
-              echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }'` > /tmp/cloud-nooba
+
+              echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }' > /tmp/cloud-nooba
 
               oc create secret generic oadp-s3-backup-bucket-nooba-velero --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp              
 ---
