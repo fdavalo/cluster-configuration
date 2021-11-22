@@ -23,4 +23,23 @@ spec:
               echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[bucket]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }'` > /tmp/cloud
 
               oc create secret generic oadp-s3-backup-bucket-velero --from-file=cloud=/tmp/cloud -n openshift-oadp
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: setup-volumesnapshotclass-labels
+  namespace: openshift-storage
+spec:
+  serviceAccountName: ocs-operator
+  restartPolicy: OnFailure
+  containers:
+    - name: cli
+      image: 'quay.io/openshift/origin-cli'
+      command:
+            - /bin/bash
+            - '-c'
+      args:
+            - >- 
+              oc patch volumesnapshotclass ocs-storagecluster-rbdplugin-snapclass -p '{"metadata":{"labels":{"velero.io/csi-volumesnapshot-class":"true"}}}'
 
+              oc patch volumesnapshotclass ocs-storagecluster-cephfsplugin-snapclass -p '{"metadata":{"labels":{"velero.io/csi-volumesnapshot-class":"true"}}}'
