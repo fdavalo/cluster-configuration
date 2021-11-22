@@ -7,24 +7,41 @@ spec:
   backupStorageLocations:
     - config:
         insecureSkipTLSVerify: 'true'
-        profile: bucket
+        profile: rgw
         region: us-east-1
         s3ForcePathStyle: 'true'
         s3Url: 'http://rook-ceph-rgw-ocs-storagecluster-cephobjectstore.openshift-storage.svc:80'
       credential:
         key: cloud
         name: oadp-s3-backup-bucket-rgw-velero
-      default: true
       objectStorage:
         bucket: oadp-s3-backup-bucket-rgw
         prefix: velero
       provider: aws
+    - config:
+        insecureSkipTLSVerify: 'true'
+        profile: nooba
+        region: us-east-1
+        s3ForcePathStyle: 'true'
+        s3Url: 's3.openshift-storage.svc:443'
+      credential:
+        key: cloud
+        name: oadp-s3-backup-bucket-nooba-velero
+      default: true
+      objectStorage:
+        bucket: oadp-s3-backup-bucket-nooba
+        prefix: velero
+      provider: aws      
   defaultVeleroPlugins:
     - aws
   enableRestic: true
   noobaa: true
   volumeSnapshotLocations:
     - config:
-        profile: bucket
+        profile: rgw
         region: us-east-1
       provider: aws
+    - config:
+        profile: nooba
+        region: us-east-1
+      provider: aws      
