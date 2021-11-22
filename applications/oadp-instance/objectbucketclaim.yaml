@@ -1,9 +1,20 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: oadp-s3-backup-bucket
+  name: oadp-s3-backup-bucket-rgw
   namespace: openshift-oadp
 spec:
-  bucketName: oadp-s3-backup-bucket
-  objectBucketName: oadp-s3-backup-bucket
+  bucketName: oadp-s3-backup-bucket-rgw
+  objectBucketName: oadp-s3-backup-bucket-rgw
   storageClassName: ocs-storagecluster-ceph-rgw
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: oadp-s3-backup-bucket-nooba
+  namespace: openshift-oadp
+spec:
+  bucketName: oadp-s3-backup-bucket-nooba
+  objectBucketName: oadp-s3-backup-bucket-nooba
+  storageClassName: openshift-storage.noobaa.io
+
