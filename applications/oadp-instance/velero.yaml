@@ -21,16 +21,10 @@ spec:
       provider: aws
   defaultVeleroPlugins:
     - aws
-    - csi
-    - openshift
   enableRestic: true
-  veleroFeatureFlags:
-    - EnableCSI
+  noobaa: true
   volumeSnapshotLocations:
     - config:
-        insecureSkipTLSVerify: 'true'
         profile: bucket
         region: us-east-1
-        s3ForcePathStyle: 'true'
-        s3Url: 'https://s3.openshift-storage.svc'
       provider: aws
