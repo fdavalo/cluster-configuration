@@ -13,10 +13,10 @@ spec:
         s3Url: 'http://rook-ceph-rgw-ocs-storagecluster-cephobjectstore.openshift-storage.svc:80'
       credential:
         key: cloud
-        name: oadp-s3-backup-bucket-velero
+        name: oadp-s3-backup-bucket-rgw-velero
       default: true
       objectStorage:
-        bucket: oadp-s3-backup-bucket
+        bucket: oadp-s3-backup-bucket-rgw
         prefix: velero
       provider: aws
   defaultVeleroPlugins:
