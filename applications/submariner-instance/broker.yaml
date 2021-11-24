@@ -1,0 +1,11 @@
+apiVersion: submariner.io/v1alpha1
+kind: Broker
+metadata:
+  name: submariner-broker
+  namespace: submariner-operator
+spec:
+  components:
+    - service-discovery
+    - connectivity
+  defaultGlobalnetClusterSize: 65536
+  globalnetCIDRRange: 242.0.0.0/8
