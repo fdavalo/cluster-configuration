@@ -1,4 +1,5 @@
 resources:
-- objectbucketclaim.yaml
-- velero.yaml
+- objectbucketclaim-nooba.yaml
+- velero-nooba.yaml
+- pod-nooba.yaml
 - pod.yaml
