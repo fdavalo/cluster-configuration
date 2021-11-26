@@ -32,7 +32,9 @@ spec:
 
               echo "" | awk -v id=$BUCKET_ID -v key=$BUCKET_SECRET '{print "[nooba]"; print "aws_access_key_id="id; print "aws_secret_access_key="key; }' > /tmp/cloud-nooba
 
-              oc create secret generic oadp-s3-backup-bucket-nooba-velero --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp              
+              oc create secret generic oadp-s3-backup-bucket-nooba-velero --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp
+              
+              oc create secret generic cloud-credentials --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp           
 ---
 apiVersion: v1
 kind: Pod
