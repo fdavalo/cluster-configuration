@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2019-12-10T09:22:11Z"
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+  resourceVersion: "358212"
+  selfLink: /api/v1/namespaces/openshift-monitoring/configmaps/cluster-monitoring-config
+  uid: 8bb6b5b3-1b2e-11ea-807c-023c3b816f13
+data:
+  config.yaml: |
+    prometheusK8s:
+      volumeClaimTemplate:
+        metadata:
+          name: prometheusdb
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 40Gi
+    alertmanagerMain:
+      volumeClaimTemplate:
+        metadata:
+          name: alertmanager
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 40Gi
