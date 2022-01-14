@@ -1,0 +1,10 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: patch-volumesnapshotclasses     
+  - verbs:
+      - patch
+    apiGroups:
+      - 'snapshot.storage.k8s.io'
+    resources:
+      - volumesnapshotclasses
