@@ -9,14 +9,14 @@ rules:
     apiGroups:
       - ''
     resources:
-      - *
+      - '*'
   - verbs:
       - get
       - list
     apiGroups:
       - 'networking.k8s.io'
     resources:
-      - *
+      - '*'
 ---
 
 kind: ClusterRole
