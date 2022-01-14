@@ -1,3 +1,4 @@
 resources:
 - pod.yaml
 - pvc.yaml
+- rolebinding.yaml
