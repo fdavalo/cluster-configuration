@@ -1,7 +1,7 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: default-kasten-install
+  name: default-read-secret
 subjects:
   - kind: ServiceAccount
     name: default
@@ -9,4 +9,17 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kasten-install
+  name: read-secret
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: default-patch-volumesnapshotclasses
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: kasten-io
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: patch-volumesnapshotclasses
