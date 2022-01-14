@@ -30,3 +30,10 @@ rules:
       - 'snapshot.storage.k8s.io'
     resources:
       - volumesnapshotclasses
+  - verbs:
+      - get
+      - list
+    apiGroups:
+      - 'rbac.authorization.k8s.io'
+    resources:
+      - clusterrolebindings
