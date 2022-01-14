@@ -2,4 +2,5 @@ resources:
 - namespace.yaml
 - pod.yaml
 - role.yaml
+- role-patch.yaml
 - rolebinding.yaml
