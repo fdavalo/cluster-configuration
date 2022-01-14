@@ -9,16 +9,14 @@ rules:
     apiGroups:
       - ''
     resources:
-      - secrets
-      - serviceaccounts
-      - configmaps
+      - *
   - verbs:
       - get
       - list
     apiGroups:
       - 'networking.k8s.io'
     resources:
-      - networkpolicies
+      - *
 ---
 
 kind: ClusterRole
