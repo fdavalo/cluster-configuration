@@ -18,9 +18,9 @@ spec:
 
               VERIFY_CHECKSUM=false sh ./get_helm.sh            
               
-              ./helm repo add kasten https://charts.kasten.io/
+              helm repo add kasten https://charts.kasten.io/
                             
-              ./helm install k10 kasten/k10 --namespace=kasten-io --set scc.create=true --set route.enabled=true --set route.tls.enabled=true --set auth.tokenAuth.enabled=true
+              helm install k10 kasten/k10 --namespace=kasten-io --set scc.create=true --set route.enabled=true --set route.tls.enabled=true --set auth.tokenAuth.enabled=true
 
               oc annotate volumesnapshotclass ocs-storagecluster-cephfsplugin-snapclass k10.kasten.io/is-snapshot-class=true 
               
