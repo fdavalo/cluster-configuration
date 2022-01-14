@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: imageregistry-enable
-  namespace: openshift-machine-config-operator
+  namespace: openshift-image-registry
 spec:
   serviceAccountName: cluster-image-registry-operator
   restartPolicy: OnFailure
