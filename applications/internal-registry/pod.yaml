@@ -4,7 +4,7 @@ metadata:
   name: imageregistry-enable
   namespace: openshift-machine-config-operator
 spec:
-  serviceAccountName: machine-config-daemon
+  serviceAccountName: cluster-image-registry-operator
   restartPolicy: OnFailure
   containers:
         - name: cli
