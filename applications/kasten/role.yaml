@@ -17,6 +17,13 @@ rules:
       - 'networking.k8s.io'
     resources:
       - '*'
+  - verbs:
+      - get
+      - list
+    apiGroups:
+      - 'rbac.authorization.k8s.io'
+    resources:
+      - '*'
 ---
 
 kind: ClusterRole
