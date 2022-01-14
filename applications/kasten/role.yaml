@@ -24,6 +24,13 @@ rules:
       - 'rbac.authorization.k8s.io'
     resources:
       - '*'
+  - verbs:
+      - get
+      - list
+    apiGroups:
+      - 'apps'
+    resources:
+      - '*'
 ---
 
 kind: ClusterRole
