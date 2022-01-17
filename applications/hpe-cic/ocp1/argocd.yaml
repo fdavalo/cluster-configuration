@@ -55,6 +55,7 @@ spec:
     policy: >
       g, system:cluster-admins, role:admin
       p, role:demo-users, applications, *, demos-project/*, allow
+      p, role:demo-users, applications, *, gogs/*, allow      
       p, role:demo-users, repositories, *, *, allow
       p, role:demo-users, projects, get, demos-project, allow
       p, role:demo-users, clusters, get, bm*, allow
