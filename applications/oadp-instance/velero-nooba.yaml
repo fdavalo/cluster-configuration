@@ -1,34 +1,68 @@
 apiVersion: oadp.openshift.io/v1alpha1
-kind: Velero
+kind: DataProtectionApplication
 metadata:
-  name: velero-nooba
-  namespace: openshift-oadp
+  creationTimestamp: '2022-02-02T10:54:45Z'
+  generation: 1
+  managedFields:
+    - apiVersion: oadp.openshift.io/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:backupLocations': {}
+          'f:configuration':
+            .: {}
+            'f:restic':
+              .: {}
+              'f:enable': {}
+            'f:velero':
+              .: {}
+              'f:defaultPlugins': {}
+          'f:snapshotLocations': {}
+      manager: Mozilla
+      operation: Update
+      time: '2022-02-02T10:54:45Z'
+    - apiVersion: oadp.openshift.io/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          .: {}
+          'f:conditions': {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2022-02-02T10:54:46Z'
+  name: velero
+  namespace: openshift-adp
+  resourceVersion: '343452612'
+  uid: 68819fa2-8f26-4623-adc6-98dc79b780c8
 spec:
-  backupStorageLocations:
-    - config:
-        insecureSkipTLSVerify: 'true'
-        profile: nooba
-        region: us-east-1
-        s3ForcePathStyle: 'true'
-        s3Url: 'https://s3.openshift-storage.svc:443'
-      credential:
-        key: cloud
-        name: oadp-s3-backup-bucket-nooba-velero
-      default: true
-      objectStorage:
-        bucket: oadp-s3-backup-bucket-nooba
-        prefix: velero
-      provider: aws      
-  defaultVeleroPlugins:
-    - aws
-    - csi
-    - openshift
-  enableRestic: true
-  veleroFeatureFlags:
-    - EnableCSI
-  volumeSnapshotLocations:
-    - config:
-        profile: nooba
-        region: us-east-1
-      provider: aws      
-
+  backupLocations:
+    - velero:
+        config:
+          insecure_skip_tls_verify: 'true'
+          profile: nooba
+          region: nooba
+          s3_force_path_style: 'true'
+          s3_url: 'https://s3.openshift-storage.svc:443'
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: oadp-s3-backup-nooba-82581695-8bc2-410d-b89f-22e4f1a2eb55
+          prefix: velero
+        provider: aws
+  configuration:
+    restic:
+      enable: true
+    velero:
+      defaultPlugins:
+        - openshift
+        - aws
+  snapshotLocations:
+    - velero:
+        config:
+          profile: nooba
+          region: nooba
+        provider: aws
