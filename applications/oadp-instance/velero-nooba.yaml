@@ -7,11 +7,11 @@ spec:
   backupLocations:
     - velero:
         config:
-          insecure_skip_tls_verify: 'true'
+          insecureSkipTLSVerify: 'true'
           profile: nooba
           region: us-east-1
-          s3_force_path_style: 'true'
-          s3_url: 'https://s3.openshift-storage.svc:443'
+          s3ForcePathStyle: 'true'
+          s3Url: 'https://s3.openshift-storage.svc:443'          
         credential:
           key: cloud
           name: cloud-credentials
