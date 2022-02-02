@@ -1,41 +1,8 @@
 apiVersion: oadp.openshift.io/v1alpha1
 kind: DataProtectionApplication
 metadata:
-  creationTimestamp: '2022-02-02T10:54:45Z'
-  generation: 1
-  managedFields:
-    - apiVersion: oadp.openshift.io/v1alpha1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:spec':
-          .: {}
-          'f:backupLocations': {}
-          'f:configuration':
-            .: {}
-            'f:restic':
-              .: {}
-              'f:enable': {}
-            'f:velero':
-              .: {}
-              'f:defaultPlugins': {}
-          'f:snapshotLocations': {}
-      manager: Mozilla
-      operation: Update
-      time: '2022-02-02T10:54:45Z'
-    - apiVersion: oadp.openshift.io/v1alpha1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:status':
-          .: {}
-          'f:conditions': {}
-      manager: manager
-      operation: Update
-      subresource: status
-      time: '2022-02-02T10:54:46Z'
   name: velero
   namespace: openshift-adp
-  resourceVersion: '343452612'
-  uid: 68819fa2-8f26-4623-adc6-98dc79b780c8
 spec:
   backupLocations:
     - velero:
