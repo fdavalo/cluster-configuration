@@ -9,7 +9,7 @@ spec:
         config:
           insecure_skip_tls_verify: 'true'
           profile: nooba
-          region: nooba
+          region: us-east-1
           s3_force_path_style: 'true'
           s3_url: 'https://s3.openshift-storage.svc:443'
         credential:
@@ -31,5 +31,5 @@ spec:
     - velero:
         config:
           profile: nooba
-          region: nooba
+          region: us-east-1
         provider: aws
