@@ -6,4 +6,5 @@ metadata:
 spec:
   clusterSets:
     - bm-dev-clusters
+    - bm-static-clusters
 
