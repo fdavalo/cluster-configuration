@@ -5,3 +5,11 @@ metadata:
   namespace: openshift-gitops
 spec:
   clusterSet: bm-dev-clusters
+---
+apiVersion: cluster.open-cluster-management.io/v1alpha1
+kind: ManagedClusterSetBinding
+metadata:
+  name: bm-static-clusters
+  namespace: openshift-gitops
+spec:
+  clusterSet: bm-static-clusters
