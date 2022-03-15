@@ -4,7 +4,7 @@ metadata:
   name: setup-submariner-labels
   namespace: openshift-machine-config-operator
 spec:
-  serviceAccountName: ocs-operator
+  serviceAccountName: machine-config-daemon
   restartPolicy: OnFailure
   containers:
     - name: cli
@@ -16,3 +16,4 @@ spec:
             - >- 
               for node in `oc get nodes | grep worker | awk '{print $1;}'`; do 
                  oc label node $node --overwrite=true cluster.ocs.openshift.io/openshift-storage=""; 
+              done
