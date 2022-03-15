@@ -15,5 +15,7 @@ spec:
       args:
             - >- 
               for node in `oc get nodes | grep worker | awk '{print $1;}'`; do 
-                 oc label node $node --overwrite=true cluster.ocs.openshift.io/openshift-storage=""; 
+                 oc label node $node --overwrite=true submariner.io/gateway="true"
+                 ip=`oc get node $node -o wide | awk '{if ($1!="NAME") print $7;}'`
+                 oc annotate node $node --overwrite=true gateway.submariner.io/public-ip="$ip"
               done
