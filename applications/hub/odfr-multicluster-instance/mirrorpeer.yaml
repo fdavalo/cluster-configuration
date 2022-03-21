@@ -1,0 +1,14 @@
+apiVersion: multicluster.odf.openshift.io/v1alpha1
+kind: MirrorPeer
+metadata:
+  name: mirrorpeer-bm2-bm3
+spec:
+  items:
+    - clusterName: bm2
+      storageClusterRef:
+        name: ocs-storagecluster
+        namespace: openshift-storage
+    - clusterName: bm3
+      storageClusterRef:
+        name: ocs-storagecluster
+        namespace: openshift-storage
