@@ -2,7 +2,7 @@ apiVersion: apik10.kasten.io/v1alpha1
 kind: K10
 metadata:
   name: k10
-  namespace: openshift-operators
+  namespace: kasten-io
 spec:
   scc:
     create: true
