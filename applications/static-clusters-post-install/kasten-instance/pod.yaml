@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: setup-kasten
+  namespace: openshift-storage
+spec:
+  serviceAccountName: ocs-operator
+  restartPolicy: OnFailure
+  containers:
+    - name: cli
+      image: 'quay.io/openshift/origin-cli'
+      command:
+            - /bin/bash
+            - '-c'
+      args:
+            - >-
+              oc annotate volumesnapshotclass ocs-storagecluster-cephfsplugin-snapclass k10.kasten.io/is-snapshot-class=true 
+              
+              oc annotate volumesnapshotclass ocs-storagecluster-rbdplugin-snapclass k10.kasten.io/is-snapshot-class=true        
