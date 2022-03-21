@@ -4,9 +4,9 @@ metadata:
   name: oadp-operator
   namespace: openshift-oadp
 spec:
-  channel: beta
+  channel: stable
   installPlanApproval: Automatic
-  name: oadp-operator
-  source: community-operators
-  sourceNamespace: openshift-marketplace
+  name: redhat-oadp-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace  
 
