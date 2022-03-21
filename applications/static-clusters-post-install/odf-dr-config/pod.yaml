@@ -20,6 +20,8 @@ spec:
             
               for l in $(oc get pods -n openshift-storage -l app=csi-rbdplugin-provisioner -o jsonpath={.items[*].spec.containers[*].name}) ; do echo $l ; done | egrep "csi-omap-generator|volume-replication"
               
-              #oc patch storagecluster $(oc get storagecluster -n openshift-storage -o=jsonpath='{.items[0].metadata.name}')  -n openshift-storage --type json --patch  '[{ "op": "replace", "path": "/spec/mirroring", "value": {"enabled": true} }]'
+              oc get cephblockpool cephblockpool-replicated -n openshift-storage
+              
+              oc patch storagecluster $(oc get storagecluster -n openshift-storage -o=jsonpath='{.items[0].metadata.name}')  -n openshift-storage --type json --patch  '[{ "op": "replace", "path": "/spec/mirroring", "value": {"enabled": true} }]'
 
-              #oc get cephblockpool ocs-storagecluster-cephblockpool -n openshift-storage -o jsonpath='{.status.mirroringStatus.summary}{"\n"}'
+              oc get cephblockpool cephblockpool-replicated -n openshift-storage -o jsonpath='{.status.mirroringStatus.summary}{"\n"}'
