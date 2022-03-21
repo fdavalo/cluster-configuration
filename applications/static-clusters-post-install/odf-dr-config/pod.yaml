@@ -1,1 +1,21 @@
-oc patch cm rook-ceph-operator-config -n openshift-storage --type json --patch  '[{ "op": "add", "path": "/data/CSI_ENABLE_OMAP_GENERATOR", "value": "true" }]'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-dr
+  namespace: openshift-storage
+spec:
+  serviceAccountName: machine-config-daemon
+  restartPolicy: OnFailure
+  containers:
+    - name: cli
+      image: 'quay.io/openshift/origin-cli'
+      command:
+            - /bin/bash
+            - '-c'
+      args:
+            - >- 
+              oc patch cm rook-ceph-operator-config -n openshift-storage --type json --patch  '[{ "op": "add", "path": "/data/CSI_ENABLE_OMAP_GENERATOR", "value": "true" }]'
+              oc patch cm rook-ceph-operator-config -n openshift-storage --type json --patch  '[{ "op": "add", "path": "/data/CSI_ENABLE_VOLUME_REPLICATION", "value": "true" }]'
+              for l in $(oc get pods -n openshift-storage -l app=csi-rbdplugin-provisioner -o jsonpath={.items[*].spec.containers[*].name}) ; do 
+                echo $l ; 
+              done | egrep "csi-omap-generator|volume-replication"
