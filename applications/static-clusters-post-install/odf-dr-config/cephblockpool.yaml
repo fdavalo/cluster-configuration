@@ -10,7 +10,9 @@ spec:
     codingChunks: 0
     dataChunks: 0
   failureDomain: rack
-  mirroring: {}
+  mirroring: 
+    enabled: true
+    mode: image  
   quotas: {}
   replicated:
     replicasPerFailureDomain: 1
