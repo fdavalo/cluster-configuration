@@ -1,0 +1,15 @@
+apiVersion: apik10.kasten.io/v1alpha1
+kind: K10
+metadata:
+  name: k10
+  namespace: openshift-operators
+spec:
+  scc:
+    create: true
+  route:
+    enabled: true
+    tls:
+      enabled: true
+  auth:
+    tokenAuth:
+      enabled: true
