@@ -1,3 +1,4 @@
 resources:
  - cephblockpool.yaml
  - pod.yaml
+ - volumereplicationclass.yaml
