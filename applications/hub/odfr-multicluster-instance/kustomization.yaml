@@ -1,2 +1,3 @@
 resources:
   - mirrorpeer.yaml
+# redémarrer le pod odfmo pour prendre en compte l'échange de token
