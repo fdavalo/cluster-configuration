@@ -17,5 +17,5 @@ spec:
               for node in `oc get nodes | grep worker | awk '{print $1;}'`; do 
                  oc label node $node --overwrite=true submariner.io/gateway="true"
                  ip=`oc get node $node -o wide | awk '{if ($1!="NAME") if ($7=="<none>") print $6; else print $7;}'`
-                 oc annotate node $node --overwrite=true gateway.submariner.io/public-ip="$ip"
+                 oc annotate node $node --overwrite=true gateway.submariner.io/public-ip="ipv4:$ip"
               done
