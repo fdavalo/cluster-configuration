@@ -10,7 +10,7 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: edit
+  name: get-secrets
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -24,7 +24,7 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: edit
+  name: get-secrets
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -39,3 +39,33 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: edit
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-configmap--user-ca-bundle-openshift-config-dr
+  namespace: openshift-config
+subjects:
+  - kind: ServiceAccount
+    namespace: openshift-dr-system
+    name: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: edit-configmap--user-ca-bundle-openshift-config
+  namespace: openshift-config
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-secrets-configmaps-dr
+  namespace: openshift-dr-system
+subjects:
+  - kind: ServiceAccount
+    namespace: openshift-dr-system
+    name: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: edit-secrets-configmaps
+  namespace: openshift-dr-system
