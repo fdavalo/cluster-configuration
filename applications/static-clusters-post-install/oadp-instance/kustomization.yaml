@@ -1,0 +1,4 @@
+resources:
+- bucketclaim.yaml
+- dataprotectionapplication.yaml
+- pod.yaml
