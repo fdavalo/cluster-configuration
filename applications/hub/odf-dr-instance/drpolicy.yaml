@@ -1,7 +1,7 @@
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRPolicy
 metadata:
-  name: odr-gogs-5m
+  name: odr-policy-5m
 spec:
   drClusterSet:
     - name: bm2
