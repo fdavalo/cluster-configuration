@@ -40,6 +40,8 @@ spec:
               
               oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > ramenconfig.yaml
               
+              oc get cm default-ingress-cert -n openshift-config-managed -o jsonpath="{['data']['ca-bundle\.crt']}" > primary.crt
+              
               export KUBECONFIG=kubeconfig-$secondary
               
               while [[ true ]]; do oc -n openshift-dr-system get secret odrbucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
@@ -54,6 +56,20 @@ spec:
               
               export BUCKET_S=`oc get configmap odrbucket -n openshift-dr-system -o jsonpath='{.data.BUCKET_NAME}{"\n"}'`
 
+              oc get cm default-ingress-cert -n openshift-config-managed -o jsonpath="{['data']['ca-bundle\.crt']}" > secondary.crt
+              
+              export KUBECONFIG=$KUBECONFIG_HUB
+
+              oc get configmap user-ca-bundle -n openshift-config -o jsonpath="{.data.ca-bundle\.crt}" > ca-bundle.crt
+
+              cat primary.crt >> ca-bundle.crt
+              
+              cat secondary.crt >> ca-bundle.crt
+                            
+              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' ca-bundle.crt`
+              
+              oc patch configmap user-ca-bundle -n openshift-config -p "\"data\": { \"ca-bundle.crt\": \"$YAML\" }"
+              
               export KUBECONFIG=kubeconfig-$primary
 
               oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
