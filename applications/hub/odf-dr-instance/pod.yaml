@@ -83,19 +83,33 @@ spec:
               awk 'BEGIN{show=1;} {if (show==1) print $0; if ($1=="ramenControllerType:") show=0;}' /tmp/ramenconfig.yaml > /tmp/ramenconfig.yaml.start
               
               echo "s3StoreProfiles:" > /tmp/ramenconfig.yaml.end
+              
               echo "- s3ProfileName: s3-primary" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3CompatibleEndpoint: $ROUTE_P" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3Region: primary" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3Bucket: $BUCKET_P" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3SecretRef:" >> /tmp/ramenconfig.yaml.end
+              
               echo "    name: odr-s3secret-primary" >> /tmp/ramenconfig.yaml.end
+              
               echo "    namespace: openshift-dr-system" >> /tmp/ramenconfig.yaml.end
+              
               echo "- s3ProfileName: s3-secondary" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3CompatibleEndpoint: $ROUTE_S" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3Region: secondary" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3Bucket: $BUCKET_S" >> /tmp/ramenconfig.yaml.end
+              
               echo "  s3SecretRef:" >> /tmp/ramenconfig.yaml.end
+              
               echo "    name: odr-s3secret-secondary" >> /tmp/ramenconfig.yaml.end
+              
               echo "    namespace: openshift-dr-system" >> /tmp/ramenconfig.yaml.end
               
               cp /tmp/ramenconfig.yaml.start /tmp/ramenconfig.yaml
