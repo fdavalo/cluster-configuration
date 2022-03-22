@@ -1,0 +1,12 @@
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRPolicy
+metadata:
+  name: odr-gogs-5m
+spec:
+  drClusterSet:
+    - name: bm2
+      s3ProfileName: s3-primary
+    - name: bm3
+      s3ProfileName: s3-secondary
+  replicationClassSelector: {}
+  schedulingInterval: 5m
