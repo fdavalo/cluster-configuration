@@ -1,0 +1,172 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-dr-buckets
+  namespace: openshift-dr-system
+spec:
+  serviceAccountName: default
+  restartPolicy: OnFailure
+  containers:
+    - name: cli
+      image: 'quay.io/openshift/origin-cli'
+      command:
+            - /bin/bash
+            - '-c'
+      args:
+            - >-    
+              export KUBECONFIG_HUB=$KUBECONFIG
+              
+              export primary=bm2
+              
+              export secondary=bm3
+              
+              oc get secret -n $primary | grep admin-kubeconfig | awk '{system("oc get secret "$1" -n '$primary' -o jsonpath=\"{.data.kubeconfig}\"");}'  | base64 -d > kubeconfig-$primary
+              
+              oc get secret -n $secondary | grep admin-kubeconfig | awk '{system("oc get secret "$1" -n '$secondary' -o jsonpath=\"{.data.kubeconfig}\"");}'  | base64 -d > kubeconfig-$secondary
+              
+              export KUBECONFIG=kubeconfig-$primary
+              
+              while [[ true ]]; do oc -n openshift-dr-system get secret odrbucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
+              
+              export BUCKET_ID_P=`oc -n oopenshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
+              
+              export BUCKET_SECRET_P=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
+              
+              oc create secret generic odr-s3secret-primary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_P --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_P              
+  
+              export ROUTE_P=`oc get route s3 -n openshift-storage -o jsonpath --template="https://{.spec.host}{'\n'}"`
+              
+              export BUCKET_P=`oc get configmap odrbucket -n openshift-dr-system -o jsonpath='{.data.BUCKET_NAME}{"\n"}'`
+              
+              oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > ramenconfig.yaml
+              
+              export KUBECONFIG=kubeconfig-$secondary
+              
+              while [[ true ]]; do oc -n openshift-dr-system get secret odrbucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
+              
+              export BUCKET_ID_S=`oc -n oopenshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
+              
+              export BUCKET_SECRET_S=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
+              
+              oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
+              
+              export ROUTE_S=`oc get route s3 -n openshift-storage -o jsonpath --template="https://{.spec.host}{'\n'}"`
+              
+              export BUCKET_S=`oc get configmap odrbucket -n openshift-dr-system -o jsonpath='{.data.BUCKET_NAME}{"\n"}'`
+
+              export KUBECONFIG=kubeconfig-$primary
+
+              oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
+
+              export KUBECONFIG=kubeconfig-$secondary
+
+              oc create secret generic odr-s3secret-primary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_P --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_P              
+
+              export KUBECONFIG=kubeconfig-$primary
+              
+              oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > ramenconfig.yaml
+
+              awk 'BEGIN{show=1;} {if (show==1) print $0; if ($1=="ramenControllerType:") show=0;}' ramenconfig.yaml > ramenconfig.yaml.start
+              
+              echo "s3StoreProfiles:" > ramenconfig.yaml.end
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-primary
+                s3CompatibleEndpoint: $ROUTE_P
+                s3Region: primary
+                s3Bucket: $BUCKET_P
+                s3SecretRef:
+                  name: odr-s3secret-primary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-secondary
+                s3CompatibleEndpoint: $ROUTE_S
+                s3Region: secondary
+                s3Bucket: $BUCKET_S
+                s3SecretRef:
+                  name: odr-s3secret-secondary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cp ramenconfig.yaml.start ramenconfig.yaml
+              cat ramenconfig.yaml.end >> ramenconfig.yaml
+              
+              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' ramenconfig.yaml`
+              
+              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "\"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }"
+
+              export KUBECONFIG=kubeconfig-$secondary
+              
+              oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > ramenconfig.yaml
+
+              awk 'BEGIN{show=1;} {if (show==1) print $0; if ($1=="ramenControllerType:") show=0;}' ramenconfig.yaml > ramenconfig.yaml.start
+              
+              echo "s3StoreProfiles:" > ramenconfig.yaml.end
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-primary
+                s3CompatibleEndpoint: $ROUTE_P
+                s3Region: primary
+                s3Bucket: $BUCKET_P
+                s3SecretRef:
+                  name: odr-s3secret-primary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-secondary
+                s3CompatibleEndpoint: $ROUTE_S
+                s3Region: secondary
+                s3Bucket: $BUCKET_S
+                s3SecretRef:
+                  name: odr-s3secret-secondary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cp ramenconfig.yaml.start ramenconfig.yaml
+              cat ramenconfig.yaml.end >> ramenconfig.yaml
+              
+              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' ramenconfig.yaml`
+              
+              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "\"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }"
+
+              export KUBECONFIG=$KUBECONFIG_HUB
+
+              oc create secret generic odr-s3secret-primary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_P --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_P              
+
+              oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
+
+              oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > ramenconfig.yaml
+
+              awk 'BEGIN{show=1;} {if (show==1) print $0; if ($1=="ramenControllerType:") show=0;}' ramenconfig.yaml > ramenconfig.yaml.start
+              
+              echo "s3StoreProfiles:" > ramenconfig.yaml.end
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-primary
+                s3CompatibleEndpoint: $ROUTE_P
+                s3Region: primary
+                s3Bucket: $BUCKET_P
+                s3SecretRef:
+                  name: odr-s3secret-primary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cat <<EOF >>ramenconfig.yaml.end
+              - s3ProfileName: s3-secondary
+                s3CompatibleEndpoint: $ROUTE_S
+                s3Region: secondary
+                s3Bucket: $BUCKET_S
+                s3SecretRef:
+                  name: odr-s3secret-secondary
+                  namespace: openshift-dr-system
+              EOF
+              
+              cp ramenconfig.yaml.start ramenconfig.yaml
+              cat ramenconfig.yaml.end >> ramenconfig.yaml
+              
+              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' ramenconfig.yaml`
+              
+              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "\"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }"
