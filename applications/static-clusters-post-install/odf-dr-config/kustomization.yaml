@@ -1,5 +1,6 @@
 resources:
  - cephblockpool.yaml
+ - objectbucketclaim.yaml
  - pod.yaml
  - volumereplicationclass.yaml
  - storageclass.yaml
