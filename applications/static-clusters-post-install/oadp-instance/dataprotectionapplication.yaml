@@ -1,0 +1,38 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: velero
+  namespace: openshift-adp
+spec:
+  backupLocations:
+    - velero:
+        config:
+          insecureSkipTLSVerify: 'true'
+          profile: nooba
+          region: us-east-1
+          s3ForcePathStyle: 'true'
+          s3Url: 'https://s3.openshift-storage.svc:443'
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: bucket
+          prefix: velero
+        provider: aws
+  configuration:
+    restic:
+      enable: true
+    velero:
+      defaultPlugins:
+        - openshift
+        - aws
+        - csi
+      featureFlags:
+        - EnableCSI
+  snapshotLocations:
+    - velero:
+        config:
+          profile: nooba
+          region: us-east-1
+        provider: aws
