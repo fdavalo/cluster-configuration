@@ -2,7 +2,7 @@ apiVersion: oadp.openshift.io/v1alpha1
 kind: DataProtectionApplication
 metadata:
   name: velero
-  namespace: openshift-adp
+  namespace: openshift-oadp
 spec:
   backupLocations:
     - velero:
