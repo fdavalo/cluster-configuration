@@ -3,3 +3,4 @@ resources:
 - operatorgroup.yaml
 - subscription.yaml
 - rolebindings.yaml
+- roles.yaml
