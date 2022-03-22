@@ -15,4 +15,5 @@ spec:
       args:
             - >- 
               oc patch volumesnapshotclass ocs-storagecluster-rbdplugin-snapclass --type merge -p '{"metadata":{"labels":{"velero.io/csi-volumesnapshot-class":"true"}}}'
+              
               oc patch volumesnapshotclass ocs-storagecluster-cephfsplugin-snapclass --type merge -p '{"metadata":{"labels":{"velero.io/csi-volumesnapshot-class":"true"}}}'
