@@ -32,4 +32,4 @@ spec:
               
               sed -i "s/b@ucke@t/$BUCKET/g" /tmp/dp.yaml
               
-              oc patch dataprotectionapplication velero -n openshift-oadp --path-file /tmp/dp.yaml
+              oc patch dataprotectionapplication velero -n openshift-oadp --file--path /tmp/dp.yaml
