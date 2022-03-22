@@ -74,6 +74,20 @@ spec:
               
               export KUBECONFIG=/tmp/kubeconfig-$primary
 
+              oc get configmap user-ca-bundle -n openshift-config -o jsonpath="{.data.ca-bundle\.crt}" > /tmp/ca-bundle.crt
+
+              cat /tmp/primary.crt >> /tmp/ca-bundle.crt
+              
+              cat /tmp/secondary.crt >> /tmp/ca-bundle.crt
+
+              echo "data:" > /tmp/cab.yaml
+
+              echo "  ca-bundle.crt: |" >> /tmp/cab.yaml
+
+              awk '{print "    "$0;}' /tmp/ca-bundle.crt >> /tmp/cab.yaml            
+             
+              oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
+              
               oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
 
               export KUBECONFIG=/tmp/kubeconfig-$secondary
@@ -129,6 +143,20 @@ spec:
               oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system --patch-file /tmp/cm.yaml
 
               export KUBECONFIG=/tmp/kubeconfig-$secondary
+
+              oc get configmap user-ca-bundle -n openshift-config -o jsonpath="{.data.ca-bundle\.crt}" > /tmp/ca-bundle.crt
+
+              cat /tmp/primary.crt >> /tmp/ca-bundle.crt
+              
+              cat /tmp/secondary.crt >> /tmp/ca-bundle.crt
+
+              echo "data:" > /tmp/cab.yaml
+
+              echo "  ca-bundle.crt: |" >> /tmp/cab.yaml
+
+              awk '{print "    "$0;}' /tmp/ca-bundle.crt >> /tmp/cab.yaml            
+             
+              oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
               
               oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > /tmp/ramenconfig.yaml
 
