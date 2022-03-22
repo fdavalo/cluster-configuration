@@ -14,19 +14,6 @@ rules:
       - configmap
     resourceNames:
       - user-ca-bundle
----      
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: get-secrets
-rules:
-  - verbs:
-      - get
-      - list
-    apiGroups:
-      - ''
-    resources:
-      - secrets
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
