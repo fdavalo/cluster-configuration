@@ -26,10 +26,4 @@ spec:
               
               oc create secret generic cloud-credentials --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp 
 
-              export BUCKET=`oc get configmap oadp-s3-backup-bucket-nooba -n openshift-oadp -o jsonpath='{.data.BUCKET_NAME}{"\n"}'`
               
-              oc get dataprotectionapplication velero -n openshift-oadp -o yaml > /tmp/dp.yaml
-              
-              sed -i "s/b@ucke@t/$BUCKET/g" /tmp/dp.yaml
-              
-              oc patch dataprotectionapplication velero -n openshift-oadp --patch-file /tmp/dp.yaml
