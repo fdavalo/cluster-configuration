@@ -12,8 +12,6 @@ rules:
       - ''
     resources:
       - configmap
-    resourceNames:
-      - user-ca-bundle
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
@@ -41,6 +39,3 @@ rules:
       - ''
     resources:
       - secrets
-    resourceNames:
-      - odr-s3secret-primary
-      - odr-s3secret-secondary
