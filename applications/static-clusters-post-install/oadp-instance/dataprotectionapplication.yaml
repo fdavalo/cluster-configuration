@@ -17,7 +17,7 @@ spec:
           name: cloud-credentials
         default: true
         objectStorage:
-          bucket: bucket
+          bucket: b@ucke@t
           prefix: velero
         provider: aws
   configuration:
