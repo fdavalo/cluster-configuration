@@ -4,7 +4,7 @@ metadata:
   name: setup-bucket-credentials-nooba
   namespace: openshift-oadp
 spec:
-  serviceAccountName: oadp-operator
+  serviceAccountName: velero
   restartPolicy: OnFailure
   containers:
     - name: cli
