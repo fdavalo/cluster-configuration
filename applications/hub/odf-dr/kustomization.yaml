@@ -4,3 +4,4 @@ resources:
 - subscription.yaml
 - rolebindings.yaml
 - roles.yaml
+- clusterrole.yaml
