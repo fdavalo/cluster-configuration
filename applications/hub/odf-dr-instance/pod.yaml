@@ -28,7 +28,7 @@ spec:
               
               while [[ true ]]; do oc -n openshift-dr-system get secret odrbucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
-              export BUCKET_ID_P=`oc -n oopenshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
+              export BUCKET_ID_P=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
               
               export BUCKET_SECRET_P=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
               
@@ -44,7 +44,7 @@ spec:
               
               while [[ true ]]; do oc -n openshift-dr-system get secret odrbucket; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
               
-              export BUCKET_ID_S=`oc -n oopenshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
+              export BUCKET_ID_S=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d`
               
               export BUCKET_SECRET_S=`oc -n openshift-dr-system get secret odrbucket -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d`
               
