@@ -5,8 +5,8 @@ metadata:
   namespace: bm2
 subjects:
   - kind: ServiceAccount
-    name: openshift-dr-system
-    namespace: default
+    namespace: openshift-dr-system
+    name: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -19,8 +19,8 @@ metadata:
   namespace: bm3
 subjects:
   - kind: ServiceAccount
-    name: openshift-dr-system
-    namespace: default
+    namespace: openshift-dr-system
+    name: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
