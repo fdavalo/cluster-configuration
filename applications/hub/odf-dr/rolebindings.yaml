@@ -1,0 +1,27 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: bm2-odf-dr-edit
+  namespace: bm2
+subjects:
+  - kind: ServiceAccount
+    name: openshift-dr-system
+    namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: bm3-odf-dr-edit
+  namespace: bm3
+subjects:
+  - kind: ServiceAccount
+    name: openshift-dr-system
+    namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
