@@ -63,10 +63,14 @@ spec:
               cat /tmp/primary.crt >> /tmp/ca-bundle.crt
               
               cat /tmp/secondary.crt >> /tmp/ca-bundle.crt
-                            
-              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' /tmp/ca-bundle.crt`
-              
-              oc patch configmap user-ca-bundle -n openshift-config -p "{ \"data\": { \"ca-bundle.crt\": \"$YAML\" }}"
+
+              echo "data:" > /tmp/cab.yaml
+
+              echo "  ca-bundle.crt: |" >> /tmp/cab.yaml
+
+              awk '{print "    "$0;}' /tmp/ca-bundle.crt >> /tmp/cab.yaml            
+             
+              oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
               
               export KUBECONFIG=/tmp/kubeconfig-$primary
 
@@ -115,10 +119,14 @@ spec:
               cp /tmp/ramenconfig.yaml.start /tmp/ramenconfig.yaml
               
               cat /tmp/ramenconfig.yaml.end >> /tmp/ramenconfig.yaml
+
+              echo "data:" > /tmp/cm.yaml
+
+              echo "  ramen_manager_config.yaml: |" >> /tmp/cm.yaml
+
+              awk '{print "    "$0;}' /tmp/ramenconfig.yaml >> /tmp/cm.yaml
               
-              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' /tmp/ramenconfig.yaml`
-              
-              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "{ \"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }}"
+              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system --patch-file /tmp/cm.yaml
 
               export KUBECONFIG=/tmp/kubeconfig-$secondary
               
@@ -130,17 +138,21 @@ spec:
               
               cat /tmp/ramenconfig.yaml.end >> /tmp/ramenconfig.yaml
               
-              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' /tmp/ramenconfig.yaml`
-              
-              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "{ \"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }}"
+              echo "data:" > /tmp/cm.yaml
 
+              echo "  ramen_manager_config.yaml: |" >> /tmp/cm.yaml
+
+              awk '{print "    "$0;}' /tmp/ramenconfig.yaml >> /tmp/cm.yaml
+              
+              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system --patch-file /tmp/cm.yaml
+              
               export KUBECONFIG=$KUBECONFIG_HUB
 
               oc create secret generic odr-s3secret-primary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_P --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_P              
 
               oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
 
-              oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > /tmp/ramenconfig.yaml
+              oc get configmap ramen-hub-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > /tmp/ramenconfig.yaml
 
               awk 'BEGIN{show=1;} {if (show==1) print $0; if ($1=="ramenControllerType:") show=0;}' /tmp/ramenconfig.yaml > /tmp/ramenconfig.yaml.start
               
@@ -148,6 +160,10 @@ spec:
               
               cat /tmp/ramenconfig.yaml.end >> /tmp/ramenconfig.yaml
               
-              export YAML=`awk '{s=s""substr($0,1,length($0))"\\n";} END{print s;}' /tmp/ramenconfig.yaml`
+              echo "data:" > /tmp/cm.yaml
+
+              echo "  ramen_manager_config.yaml: |" >> /tmp/cm.yaml
+
+              awk '{print "    "$0;}' /tmp/ramenconfig.yaml >> /tmp/cm.yaml
               
-              oc patch configmap ramen-dr-cluster-operator-config -n openshift-dr-system -p "{ \"data\": { \"ramen_manager_config.yaml\": \"$YAML\" }}"
+              oc patch configmap ramen-hub-operator-config -n openshift-dr-system --patch-file /tmp/cm.yaml
