@@ -75,6 +75,8 @@ spec:
               export KUBECONFIG=/tmp/kubeconfig-$primary
 
               oc get configmap user-ca-bundle -n openshift-config -o jsonpath="{.data.ca-bundle\.crt}" > /tmp/ca-bundle.crt
+              
+              ret=$?
 
               cat /tmp/primary.crt >> /tmp/ca-bundle.crt
               
@@ -85,8 +87,17 @@ spec:
               echo "  ca-bundle.crt: |" >> /tmp/cab.yaml
 
               awk '{print "    "$0;}' /tmp/ca-bundle.crt >> /tmp/cab.yaml            
-             
-              oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
+
+              if [[ $ret -eq 0 ]]; then
+              
+                oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
+              
+              else
+              
+                oc create configmap user-ca-bundle -n openshift-config --file /tmp/cab.yaml
+                
+                oc patch proxy cluster -p '{"spec": {"trustedCA": {"name": "user-ca-bundle"}}}' --type='merge'
+              fi
               
               oc create secret generic odr-s3secret-secondary -n openshift-dr-system --from-literal=AWS_ACCESS_KEY_ID=$BUCKET_ID_S --from-literal=AWS_SECRET_ACCESS_KEY=$BUCKET_SECRET_S
 
@@ -145,6 +156,8 @@ spec:
               export KUBECONFIG=/tmp/kubeconfig-$secondary
 
               oc get configmap user-ca-bundle -n openshift-config -o jsonpath="{.data.ca-bundle\.crt}" > /tmp/ca-bundle.crt
+              
+              ret=$?
 
               cat /tmp/primary.crt >> /tmp/ca-bundle.crt
               
@@ -156,7 +169,16 @@ spec:
 
               awk '{print "    "$0;}' /tmp/ca-bundle.crt >> /tmp/cab.yaml            
              
-              oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
+              if [[ $ret -eq 0 ]]; then
+              
+                oc patch configmap user-ca-bundle -n openshift-config --patch-file /tmp/cab.yaml
+              
+              else
+              
+                oc create configmap user-ca-bundle -n openshift-config --file /tmp/cab.yaml
+                
+                oc patch proxy cluster -p '{"spec": {"trustedCA": {"name": "user-ca-bundle"}}}' --type='merge'
+              fi
               
               oc get configmap ramen-dr-cluster-operator-config -n openshift-dr-system -o jsonpath="{.data.ramen_manager_config\.yaml}" > /tmp/ramenconfig.yaml
 
