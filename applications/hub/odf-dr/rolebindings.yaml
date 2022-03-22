@@ -53,7 +53,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: edit-configmap--user-ca-bundle-openshift-config
-  namespace: openshift-config
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -68,4 +67,3 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: edit-secrets-configmaps
-  namespace: openshift-dr-system
