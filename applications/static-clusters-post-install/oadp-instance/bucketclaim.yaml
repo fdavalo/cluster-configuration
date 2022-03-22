@@ -1,0 +1,9 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: oadp-s3-backup-bucket-nooba
+  namespace: openshift-oadp
+spec:
+  bucketName: oadp-s3-backup-bucket-nooba
+  objectBucketName: oadp-s3-backup-bucket-nooba
+  storageClassName: openshift-storage.noobaa.io
