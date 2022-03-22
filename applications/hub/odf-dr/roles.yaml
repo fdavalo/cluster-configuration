@@ -42,8 +42,6 @@ rules:
       - ''
     resources:
       - configmaps
-    resourceNames:
-      - ramen-dr-cluster-operator-config
   - verbs:
       - get
       - list
