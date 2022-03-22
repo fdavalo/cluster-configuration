@@ -25,5 +25,7 @@ spec:
               oc create secret generic oadp-s3-backup-bucket-nooba-velero --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp
               
               oc create secret generic cloud-credentials --from-file=cloud=/tmp/cloud-nooba -n openshift-oadp 
+              
+              oc get secret oadp-s3-backup-bucket-nooba-velero -n openshift-oadp
 
               
