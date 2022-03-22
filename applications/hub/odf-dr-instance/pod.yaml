@@ -94,7 +94,7 @@ spec:
               
               else
               
-                oc create configmap user-ca-bundle -n openshift-config --from-file /tmp/cab.yaml
+                oc create configmap user-ca-bundle -n openshift-config --from-file /tmp/ca-bundle.crt
                 
                 oc patch proxy cluster -p '{"spec": {"trustedCA": {"name": "user-ca-bundle"}}}' --type='merge'
               fi
@@ -175,7 +175,7 @@ spec:
               
               else
               
-                oc create configmap user-ca-bundle -n openshift-config --from-file /tmp/cab.yaml
+                oc create configmap user-ca-bundle -n openshift-config --from-file /tmp/ca-bundle.crt
                 
                 oc patch proxy cluster -p '{"spec": {"trustedCA": {"name": "user-ca-bundle"}}}' --type='merge'
               fi
