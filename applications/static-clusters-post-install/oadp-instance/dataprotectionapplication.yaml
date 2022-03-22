@@ -17,7 +17,7 @@ spec:
           name: cloud-credentials
         default: true
         objectStorage:
-          bucket: b@ucke@t
+          bucket: oadp-s3-backup-bucket-nooba
           prefix: velero
         provider: aws
   configuration:
