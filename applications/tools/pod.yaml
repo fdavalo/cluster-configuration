@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tools
+spec:
+  containers:
+    - name: tools
+      image: 'image-registry.openshift-image-registry.svc:5000/openshift/tools'
+      command: ['sh', '-c', 'tail -f /dev/null']
