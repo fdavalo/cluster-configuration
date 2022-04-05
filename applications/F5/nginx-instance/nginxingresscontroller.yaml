@@ -1,0 +1,32 @@
+apiVersion: k8s.nginx.org/v1alpha1
+kind: NginxIngressController
+metadata:
+  name: nginx-ingress-controller
+  namespace: nginx-ingress
+spec:
+  logLevel: 0
+  wildcardTLS: ''
+  enableCRDs: null
+  ingressClass: nginx
+  enableLeaderElection: null
+  enableLatencyMetrics: false
+  watchNamespace: ''
+  nginxReloadTimeout: 0
+  appProtect: null
+  serviceType: NodePort
+  defaultSecret: ''
+  globalConfiguration: ''
+  nginxPlus: true
+  enablePreviewPolicies: false
+  service: null
+  enableSnippets: false
+  nginxDebug: false
+  appProtectDos: null
+  type: deployment
+  image:
+    pullPolicy: Always
+    repository: >-
+      image-registry.openshift-image-registry.svc:5000/nginx-ingress/nginx-plus-ingress
+    tag: 2.1.1-ubi
+  replicas: null
+  enableTLSPassthrough: false
