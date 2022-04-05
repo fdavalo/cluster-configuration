@@ -1,0 +1,5 @@
+export KUBECONFIG=ocp1/kubeconfig
+oc login -u kubeadmin
+podman login -u kubeadmin -p $(oc whoami -t) --tls-verify=false default-route-openshift-image-registry.apps.ocp1.redhat.hpecic.net
+podman tag private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress:2.1.1-ubi default-route-openshift-image-registry.apps.ocp1.redhat.hpecic.net/nginx-ingress/nginx-plus-ingress:2.1.1-ubi
+podman push default-route-openshift-image-registry.apps.ocp1.redhat.hpecic.net/nginx-ingress/nginx-plus-ingress:2.1.1-ubi --tls-verify=false
