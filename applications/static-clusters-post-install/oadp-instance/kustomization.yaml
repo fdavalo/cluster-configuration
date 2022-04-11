@@ -2,4 +2,4 @@ resources:
 - bucketclaim.yaml
 - dataprotectionapplication.yaml
 - pod.yaml
-- pod-annotations.yaml
+#plus besoin - pod-annotations.yaml
