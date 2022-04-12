@@ -7,3 +7,4 @@ resources:
  - pod.yaml
  - bucketclaim.yaml
  - multiclusterobservability.yaml
+ - prometheusrule.yaml
