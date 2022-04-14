@@ -10,3 +10,7 @@ spec:
     - name: skopeo
       image: 'registry.redhat.io/rhel8/skopeo:latest'
       command: ['sh', '-c', 'tail -f /dev/null']
+
+
+skopeo login -u kubeadmin -p ... --tls-verify=false image-registry.openshift-image-registry.svc:500
+skopeo inspect docker://image-registry.openshift-image-registry.svc:5000/demo-dev/spring-petclinic:latest --tls-verify=false
