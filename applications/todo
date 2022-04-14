@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skopeo
+  labels:
+    app: skopeo
+  namespace: fdavalo
+spec:
+  containers:
+    - name: skopeo
+      image: 'registry.redhat.io/rhel8/skopeo:latest'
+      command: ['sh', '-c', 'tail -f /dev/null']
