@@ -14,4 +14,4 @@ spec:
             - '-c'
           args:
             - >-
-              oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim":"image-registry-storage-cephfs"}},"managementState":"Managed"}}'
+              oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim":"image-registry-storage-cephfs"}},"replicas":4,"managementState":"Managed"}}'
