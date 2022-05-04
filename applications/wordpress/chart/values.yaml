@@ -9,8 +9,8 @@ wordpress:
         enabled: false
       podSecurityContext:
         enabled: false
-  memcached:
-    containerSecurityContext:
-      enabled: false
-    podSecurityContext:
-      enabled: false
+memcached:
+  containerSecurityContext:
+    enabled: false
+  podSecurityContext:
+    enabled: false
