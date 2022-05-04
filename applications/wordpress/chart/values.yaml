@@ -1,0 +1,11 @@
+wordpress:
+  containerSecurityContext:
+    enabled: false
+  podSecurityContext:
+    enabled: false
+  mariadb:
+    primary:
+      containerSecurityContext:
+        enabled: false
+      podSecurityContext:
+        enabled: false
