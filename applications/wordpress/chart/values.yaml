@@ -5,6 +5,8 @@ wordpress:
     enabled: false
   metrics:
     enabled: true
+    serviceMonitor:
+      enabled: true
   mariadb:
     primary:
       containerSecurityContext:
@@ -18,6 +20,10 @@ memcached:
     enabled: false
   metrics:
     enabled: true
+    serviceMonitor:
+      enabled: true
 mariadb:
   metrics:
     enabled: true
+    serviceMonitor:
+      enabled: true
