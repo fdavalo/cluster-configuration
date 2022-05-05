@@ -3,6 +3,8 @@ wordpress:
     enabled: false
   podSecurityContext:
     enabled: false
+  metrics:
+    enabled: true
   mariadb:
     primary:
       containerSecurityContext:
@@ -14,3 +16,8 @@ memcached:
     enabled: false
   podSecurityContext:
     enabled: false
+  metrics:
+    enabled: true
+mariadb:
+  metrics:
+    enabled: true
