@@ -13,6 +13,10 @@ wordpress:
         enabled: false
       podSecurityContext:
         enabled: false
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
 memcached:
   containerSecurityContext:
     enabled: false
