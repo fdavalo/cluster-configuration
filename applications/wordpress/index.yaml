@@ -6,3 +6,5 @@ entries:
     description: A Helm chart for wordpress
     name: wordpress
     version: 0.1.0
+    urls:
+      - https://github.com/fdavalo/cluster-configuration/tree/main/applications/wordpress/chart
