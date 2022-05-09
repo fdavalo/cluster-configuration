@@ -1,5 +1,5 @@
 application:
-  version: 3.0
+  version: 1.0
 
 wordpress:
   containerSecurityContext:
@@ -13,11 +13,15 @@ wordpress:
     enabled: true
     serviceMonitor:
       enabled: true
+  persistence:
+    enabled: false
   mariadb:
     primary:
       containerSecurityContext:
         enabled: false
       podSecurityContext:
+        enabled: false
+      persistence:
         enabled: false
     metrics:
       enabled: true
