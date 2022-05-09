@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: wordpress
+  namespace: wordpress-custom
+spec:
+  to:
+    kind: Service
+    name: wordpress-custom-bm4
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
