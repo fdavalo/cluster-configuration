@@ -6,6 +6,8 @@ wordpress:
     enabled: false
   podSecurityContext:
     enabled: false
+  service:
+    type: ClusterIP
   metrics:
     enabled: true
     serviceMonitor:
