@@ -2,7 +2,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: wordpress
-  namespace: wordpress-custom
 spec:
   to:
     kind: Service
