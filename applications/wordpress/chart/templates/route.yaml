@@ -5,7 +5,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: wordpress-custom-bm4
+    name: wordpress-http
     weight: 100
   port:
     targetPort: http
