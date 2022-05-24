@@ -1,0 +1,20 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: bridge-eno49
+spec:
+  desiredState:
+    interfaces:
+      - bridge:
+          options:
+            stp:
+              enabled: false
+          port:
+            - name: eno49
+        description: Linux bridge with eno49 as a port
+        ipv4:
+          dhcp: true
+          enabled: true
+        name: bridge-eno49
+        state: up
+        type: linux-bridge
