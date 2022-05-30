@@ -6,7 +6,9 @@ spec:
   drClusterSet:
     - name: bm2
       s3ProfileName: s3-primary
+      region: hpecic
     - name: bm3
       s3ProfileName: s3-secondary
+      region: hpecic
   replicationClassSelector: {}
   schedulingInterval: 5m
