@@ -1,0 +1,98 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: rhel8-sleepy-dragonfly
+  namespace: default
+  labels:
+    app: rhel8-sleepy-dragonfly
+    flavor.template.kubevirt.io/small: 'true'
+    os.template.kubevirt.io/rhel8.5: 'true'
+    vm.kubevirt.io/template: rhel8-server-small
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.19.4
+    workload.template.kubevirt.io/server: 'true'
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: rhel8-sleepy-dragonfly-rootdisk-tvpl6
+      spec:
+        source:
+          pvc:
+            name: rhel8-1f05497b8847
+            namespace: openshift-virtualization-os-images
+        storage:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 30Gi
+          storageClassName: ocs-storagecluster-ceph-rbd
+  running: true
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: small
+        vm.kubevirt.io/os: rhel8
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        flavor.template.kubevirt.io/small: 'true'
+        kubevirt.io/domain: rhel8-sleepy-dragonfly
+        kubevirt.io/size: small
+        os.template.kubevirt.io/rhel8.5: 'true'
+        vm.kubevirt.io/name: rhel8-sleepy-dragonfly
+        workload.template.kubevirt.io/server: 'true'
+    spec:
+      domain:
+        cpu:
+          cores: 1
+          sockets: 1
+          threads: 1
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+            - bootOrder: 1
+              disk:
+                bus: virtio
+              name: rootdisk
+          interfaces:
+            - macAddress: '02:3e:24:00:00:03'
+              masquerade: {}
+              model: virtio
+              name: default
+            - bridge: {}
+              macAddress: '02:3e:24:00:00:04'
+              model: virtio
+              name: nic-0
+          networkInterfaceMultiqueue: true
+          rng: {}
+        machine:
+          type: pc-q35-rhel8.4.0
+        resources:
+          requests:
+            memory: 2Gi
+      evictionStrategy: LiveMigrate
+      hostname: rhel8-sleepy-dragonfly
+      networks:
+        - name: default
+          pod: {}
+        - multus:
+            networkName: vlan3501
+          name: nic-0
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              user: cloud-user
+              password: clouduser
+              chpasswd:
+                expire: false
+          name: cloudinitdisk
+        - dataVolume:
+            name: rhel8-sleepy-dragonfly-rootdisk-tvpl6
+          name: rootdisk
