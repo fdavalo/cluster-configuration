@@ -1,0 +1,91 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: node-assistedinstaller
+  namespace: clusters
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: node-assistedinstaller-rootdisk-lob1j
+        namespace: clusters
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: rhel8
+          namespace: openshift-virtualization-os-images
+        storage:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 120Gi
+          storageClassName: ocs-storagecluster-ceph-rbd
+          volumeMode: Block
+  running: false
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: large
+        vm.kubevirt.io/os: rhel8
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        kubevirt.io/domain: worker2-asi
+        kubevirt.io/size: large
+        os.template.kubevirt.io/rhel8.5: 'true'
+        vm.kubevirt.io/name: worker2-asi
+        workload.template.kubevirt.io/server: 'true'
+    spec:
+      domain:
+        cpu:
+          cores: 4
+          sockets: 1
+          threads: 1
+        devices:
+          autoattachPodInterface: false
+          disks:
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+            - bootOrder: 2
+              disk:
+                bus: virtio
+              name: rootdisk
+            - bootOrder: 1
+              cdrom:
+                bus: sata
+              name: install
+          interfaces:
+            - bridge: {}
+              model: virtio
+              name: nic-0
+          networkInterfaceMultiqueue: true
+          rng: {}
+        machine:
+          type: pc-q35-rhel8.4.0
+        resources:
+          requests:
+            memory: 16Gi
+      evictionStrategy: LiveMigrate
+      hostname: node-assistedinstaller
+      networks:
+        - multus:
+            networkName: vlan1082
+          name: nic-0
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              user: cloud-user
+              password: 'a10y-bcov-auig'
+              chpasswd:
+                expire: false
+          name: cloudinitdisk
+        - dataVolume:
+            name: node-assistedinstaller-rootdisk-lob1j
+          name: rootdisk
+        - name: install
+          persistentVolumeClaim:
+            claimName: assistedinstaller-iso-cdrom
