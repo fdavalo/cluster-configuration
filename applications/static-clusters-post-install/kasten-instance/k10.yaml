@@ -1,5 +1,5 @@
 apiVersion: apik10.kasten.io/v1alpha1
-kind: K10
+kind: K10no
 metadata:
   name: k10
   namespace: kasten-io
