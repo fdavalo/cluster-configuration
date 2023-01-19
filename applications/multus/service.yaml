@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: router-externe-1085
+  namespace: openshift-ingress
+spec:
+  externalIPs:
+    - 10.6.85.198
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: https
+    - name: metrics
+      protocol: TCP
+      port: 1936
+      targetPort: 1936
+  allocateLoadBalancerNodePorts: false
+  type: LoadBalancer
+  selector:
+    ingresscontroller.operator.openshift.io/deployment-ingresscontroller: default
