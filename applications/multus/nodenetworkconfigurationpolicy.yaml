@@ -1,7 +1,7 @@
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: vlan-ens224-1081-policy
+  name: vlan-ens224-policy
 spec:
   desiredState:
     interfaces:
