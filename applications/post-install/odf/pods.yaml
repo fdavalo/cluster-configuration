@@ -4,7 +4,7 @@ metadata:
   name: label-nodes
   namespace: openshift-machine-config-operator
 spec:
-  serviceAccountName: machine-config-daemon
+  serviceAccountName: default
   restartPolicy: OnFailure
   containers:
         - name: cli
