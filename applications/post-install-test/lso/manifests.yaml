@@ -37,6 +37,7 @@ kind: LocalVolume
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/hook: PostSync
   name: local-sdb
   namespace: openshift-local-storage
 spec:
