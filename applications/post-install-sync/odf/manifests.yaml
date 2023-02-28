@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: openshift-storage
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: openshift-storage
+  namespace: openshift-storage
+spec:
+  targetNamespaces:
+    - openshift-storage
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: odf-operator
+  namespace: openshift-storage
+spec:
+  channel: stable-4.11
+  installPlanApproval: Automatic
+  name: odf-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: Replace=true
+  name: label-nodes
+  namespace: openshift-machine-config-operator
+spec:
+  serviceAccountName: default
+  restartPolicy: OnFailure
+  containers:
+        - name: cli
+          image: 'quay.io/openshift/origin-cli'
+          command:
+            - /bin/bash
+            - '-c'
+          args:
+            - >-
+              for node in `oc get nodes | grep worker | awk '{print $1;}'`; do 
+                 oc label node $node --overwrite=true cluster.ocs.openshift.io/openshift-storage=""; 
+              done
+---
+apiVersion: ocs.openshift.io/v1
+kind: StorageCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: ocs-storagecluster
+  namespace: openshift-storage
+spec:
+  resources: {}
+  manageNodes: false
+  monDataDirHostPath: /var/lib/rook
+  storageDeviceSets:
+  - count: 1
+    dataPVCTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 558Gi
+        storageClassName: 'local-sdb'
+        volumeMode: Block
+    name: ocs-deviceset
+    placement: {}
+    portable: false
+    replica: 3
+    resources: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: Replace=true
+  name: set-default-sc
+  namespace: openshift-storage
+spec:
+  serviceAccountName: ocs-operator
+  restartPolicy: OnFailure
+  containers:
+        - name: cli
+          image: 'quay.io/openshift/origin-cli'
+          command:
+            - /bin/bash
+            - '-c'
+          args:
+            - >-
+              while [[ true ]]; do oc get sc/ocs-storagecluster-ceph-rbd; if [[ $? -eq 0 ]]; then break; fi; sleep 10; done
+              
+              oc patch sc/ocs-storagecluster-ceph-rbd -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' --type merge
+              
+              oc patch OCSInitialization ocsinit -n openshift-storage --type json --patch  '[{ "op": "replace", "path": "/spec/enableCephTools", "value": true }]'
+             
