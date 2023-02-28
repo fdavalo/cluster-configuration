@@ -1,5 +1,0 @@
-resources:
-- operatorgroup.yaml
-- subscription.yaml
-- namespace.yaml
-- localvolume.yaml
