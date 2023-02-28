@@ -3,6 +3,7 @@ kind: Subscription
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/hook: Sync
   name: local-storage-operator
   namespace: openshift-local-storage
 spec:
