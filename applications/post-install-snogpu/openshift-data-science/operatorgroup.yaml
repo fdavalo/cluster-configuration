@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  generateName: redhat-ods-operator-
+  name: redhat-ods-operator-4579d
+  namespace: redhat-ods-operator
+spec:
+  upgradeStrategy: Default

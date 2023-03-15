@@ -1,0 +1,6 @@
+resources:
+  - ./scripts/reset-scripts.yaml
+  - ./sa/service-account.yaml
+  - ./sa/rbac.yaml
+  - ./reset-cron-job.yaml
+  - ./volume-creation-job.yaml

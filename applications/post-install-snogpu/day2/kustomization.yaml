@@ -1,0 +1,7 @@
+resources:
+  # Generate hpe_redhat user
+  - ./hpe_redhat/htpass-secret.yaml
+  - ./hpe_redhat/rbac.yaml
+  - ./oauth.yaml
+  # Deploy internal registry
+  - ./image-registry.yaml
