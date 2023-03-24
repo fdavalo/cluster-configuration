@@ -4,12 +4,16 @@ metadata:
   name: k10
   namespace: kasten-io
 spec:
+  auth:
+    basicAuth:
+      enabled: true
+      htpasswd: |
+        hpe_redhat:$2y$05$eRUxLHgE8pSt/MpOpeDlQOYB.ffBA.uaNLROSC4ZcNHy2Ut5ohDGu
+    tokenAuth:
+      enabled: false
   scc:
     create: true
   route:
     enabled: true
     tls:
-      enabled: true
-  auth:
-    tokenAuth:
       enabled: true
