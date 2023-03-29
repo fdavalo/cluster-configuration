@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: my-local-storage
   local:
-    path: /tmp/local-pv-3
+    path: /tmp/local-pv3
   nodeAffinity:
     required:
       nodeSelectorTerms:
