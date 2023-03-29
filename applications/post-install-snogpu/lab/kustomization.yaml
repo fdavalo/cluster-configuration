@@ -14,6 +14,7 @@ resources:
   - ./data-science-project/ns.yaml
   - ./data-science-project/pvc.yaml
   - ./data-science-project/s3-connection-secret.yaml
+  - ./data-science-project/s3-connection-secret-rhods.yaml
 
   # Visualization server fix viewer-crd role
   - ./visualization-server/role.yaml
