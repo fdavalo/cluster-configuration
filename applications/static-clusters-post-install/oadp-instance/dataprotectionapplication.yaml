@@ -71,3 +71,7 @@ spec:
           profile: nooba
           region: us-east-1
         provider: aws
+  features:
+    dataMover:
+      credentialName: restic-secret
+      enable: false
