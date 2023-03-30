@@ -74,4 +74,4 @@ spec:
   features:
     dataMover:
       credentialName: restic-secret
-      enable: false
+      enable: true
