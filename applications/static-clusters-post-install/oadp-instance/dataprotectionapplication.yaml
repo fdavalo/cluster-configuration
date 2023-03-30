@@ -5,7 +5,8 @@ metadata:
   namespace: openshift-oadp
 spec:
   backupLocations:
-    - velero:
+    - name: local
+      velero:
         config:
           insecureSkipTLSVerify: 'true'
           profile: nooba
@@ -18,7 +19,41 @@ spec:
         default: true
         objectStorage:
           bucket: oadp-s3-backup-bucket-nooba
-          prefix: velero
+          prefix: local
+        provider: aws
+    - name: bm3
+      velero:
+        config:
+          insecureSkipTLSVerify: 'false'
+          profile: nooba
+          region: us-east-1
+          s3ForcePathStyle: 'true'
+          s3Url: 'https://s3-openshift-storage.apps.bm3.redhat.hpecic.net'
+        credential:
+          key: cloud
+          name: cloud-credentials-bm3
+        default: true
+        objectStorage:
+          bucket: oadp-s3-backup-bucket-nooba
+          prefix: bm3
+          caCert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURiekNDQWxlZ0F3SUJBZ0lJTVc3SlNHWnF0V3d3RFFZSktvWklodmNOQVFFTEJRQXdKakVrTUNJR0ExVUUKQXd3YmFXNW5jbVZ6Y3kxdmNHVnlZWFJ2Y2tBeE5qUTNNamsxTWpVNU1CNFhEVEl6TURNd016QXhOVGcwTjFvWApEVEkxTURNd01qQXhOVGcwT0Zvd0p6RWxNQ01HQTFVRUF3d2NLaTVoY0hCekxtSnRNeTV5WldSb1lYUXVhSEJsClkybGpMbTVsZERDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTHRNNFYrSXo5S0YKWGg4cjEwd0wwSURlMDl5UWRoWXJnSzNDNW9FWk51ckEya0hOS2pma2FTNUcrNkRaaWNITXdwYVVrblo5Sk9vbgpLMmVydUhxQ1ZKRnVhendSL0FZQ05QQnZSL1BBcGgySzlFL00xalcrOGRPc0FHN2lNNG9pSENMK1oxWDNOS0dYCnhZaWxMTFEzMFFhM3RxaDFRcmtRbGpJZXRzUDNncEhneGxPcVRlN3VOMHRoeFl2elBEVWhoTFdxaXFSdVN3bG4KOUJsbkJqNU9NQ3ZVSXJXTW9KbzdhbE1MOTgwN2t6b0JiNy9pOEs4elNFYm5XQ2pKb0FxYVF6UFJwZVErYjZ1ZwpuTjZXcG5rdFFnMnJZZnZqVkQrMTFPUlJ5MmtzQi80ckJWQ3ZMMnpmcWpQREkzN29WTFNRTTBtZHpDWmcwY25vCmFKKzhXUGlha29jQ0F3RUFBYU9CbnpDQm5EQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsQkF3d0NnWUkKS3dZQkJRVUhBd0V3REFZRFZSMFRBUUgvQkFJd0FEQWRCZ05WSFE0RUZnUVVIeitCdUl5elFSY3daV25LMEZkdgpseXVvN0VNd0h3WURWUjBqQkJnd0ZvQVVHZ1BtSGpDclBQemdSSGpKSEc1R0cxUlZjend3SndZRFZSMFJCQ0F3CkhvSWNLaTVoY0hCekxtSnRNeTV5WldSb1lYUXVhSEJsWTJsakxtNWxkREFOQmdrcWhraUc5dzBCQVFzRkFBT0MKQVFFQWE3d21nL1RFdENXNElMUklLWkRLVTlUOHF1Ky9NaktkWjFIUDhEYU5Cdm1reFlacTF6ZndSeGtwRktYMwpNQmhNYjZzV0ZBQzZFbG1icHNZU2U4T0xHNDlmK2RXS2w0VHZSdkNjUWZNbnIyblJSd3I2Q2NqK1FzTFl4TVlHCkpqb3VZOUJ5akNDMkpQQ2RyV1pnU08vc0tnNlhoeWl0ZU5nVWRrZ0xHeUFoYlBTK1BHbVdlb1lkdDRqVUwrVy8KVHhFR1ZzZS9keVZieG5pY200aFJNclhGb2pLd1hUUGNIK3FMVVNaQXRPakU5ZkcwTEIxNEY4cXpkZHIrdGgyNwpJNUNydTF5TFlXMHl4TkNIQnlqWVZ0Ti9SZ2gzNWE4aDVQelJKQWROZWpNRlpnalFjeGVjNEd0ZWthV3BPaU5SCnQ3LzRsbHpsSWdlbGNGQ3drR0lmdDZ2SzFnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+        provider: aws
+    - name: bm2
+      velero:
+        config:
+          insecureSkipTLSVerify: 'false'
+          profile: nooba
+          region: us-east-1
+          s3ForcePathStyle: 'true'
+          s3Url: 'https://s3-openshift-storage.apps.bm2.redhat.hpecic.net'
+        credential:
+          key: cloud
+          name: cloud-credentials-bm2
+        default: true
+        objectStorage:
+          bucket: oadp-s3-backup-bucket-nooba
+          prefix: bm2
+          caCert: VRlN3VOMHRoeFl2elBEVWhoTFdxaXFSdVN3bG4KOUJsbkJqNU9NQ3ZVSXJXTW9KbzdhbE1MOTgwN2t6b0JiNy9pOEs4elNFYm5XQ2pKb0FxYVF6UFJwZVErYjZ1ZwpuTjZXcG5rdFFnMnJZZnZqVkQrMTFPUlJ5MmtzQi80ckJWQ3ZMMnpmcWpQREkzN29WTFNRTTBtZHpDWmcwY25vCmFKKzhXUGlha29jQ0F3RUFBYU9CbnpDQm5EQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsQkF3d0NnWUkKS3dZQkJRVUhBd0V3REFZRFZSMFRBUUgvQkFJd0FEQWRCZ05WSFE0RUZnUVVIeitCdUl5elFSY3daV25LMEZkdgpseXVvN0VNd0h3WURWUjBqQkJnd0ZvQVVHZ1BtSGpDclBQemdSSGpKSEc1R0cxUlZjend3SndZRFZSMFJCQ0F3CkhvSWNLaTVoY0hCekxtSnRNeTV5WldSb1lYUXVhSEJsWTJsakxtNWxkREFOQmdrcWhraUc5dzBCQVFzRkFBT0MKQVFFQWE3d21nL1RFdENXNElMUklLWkRLVTlUOHF1Ky9NaktkWjFIUDhEYU5Cdm1reFlacTF6ZndSeGtwRktYMwpNQmhNYjZzV0ZBQzZFbG1icHNZU2U4T0xHNDlmK2RXS2w0VHZSdkNjUWZNbnIyblJSd3I2Q2NqK1FzTFl4TVlHCkpqb3VZOUJ5akNDMkpQQ2RyV1pnU08vc0tnNlhoeWl0ZU5nVWRrZ0xHeUFoYlBTK1BHbVdlb1lkdDRqVUwrVy8KVHhFR1ZzZS9keVZieG5pY200aFJNclhGb2pLd1hUUGNIK3FMVVNaQXRPakU5ZkcwTEIxNEY4cXpkZHIrdGgyNwpJNUNydTF5TFlXMHl4TkNIQnlqWVZ0Ti9SZ2gzNWE4aDVQelJKQWROZWpNRlpnalFjeGVjNEd0ZWthV3BPaU5SCnQ3LzRsbHpsSWdlbGNGQ3drR0lmdDZ2SzFnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
         provider: aws
   configuration:
     restic:
