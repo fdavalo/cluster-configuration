@@ -10,7 +10,6 @@ spec:
           - metadata-store-mariadb
           - integration-odhdashboard
           - ds-pipeline-ui
-          - component-visualization-server
           - object-store-minio
           - default-configs
         repoRef:
