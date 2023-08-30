@@ -1,9 +1,9 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: install-config-cm
+  name: data-cm
   namespace: {{ .Values.cluster.name }}
-data: |
+install-config.yaml: |
   apiVersion: v1
   metadata:
     name: {{ .Values.cluster.name }}
@@ -45,3 +45,89 @@ data: |
   sshKey: |-
     @sshKey@
   imageContentSources:
+pull-secret.yaml: |
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name:  {{ .Values.cluster.name }}-pull-secret
+    namespace: {{ .Values.cluster.name }}
+  stringData:
+    .dockerconfigjson: |-
+      {"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfYjQ0NDdlYjdjZmNmNGQwNzkwNDlhY2U3MjNkNDAyMGQ6V0JNN1pQM05TRzFBNDZKVFkyUFM4UDZJSkdBM05QRkNHMkFBVjYwUVVZVU0yV0sxVENYTTMyNVo3NktFS0tHUQ==","email":"fdavalo@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfYjQ0NDdlYjdjZmNmNGQwNzkwNDlhY2U3MjNkNDAyMGQ6V0JNN1pQM05TRzFBNDZKVFkyUFM4UDZJSkdBM05QRkNHMkFBVjYwUVVZVU0yV0sxVENYTTMyNVo3NktFS0tHUQ==","email":"fdavalo@redhat.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLWNhYjNjYjMyLTZlZTMtNDkzNS05ZWY4LTgwODE1NGI1MWJmODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpNV1l3WWpsaU9HVXpOVGMwWkdKak9ETXhZamd4WXprd1lUTXlOekppWVNKOS5FU3d0WWl4eHgtUlpCUUl1VUhlTWMteUJQenl0QUpSa19ES0NEMlFnWnhKdERzZnVrOGFWdktNNklRRzZxbUd6UGlHTU5UUG9OemdJY3NNTWtSQmVPVUdzay00aDhLN1JIcUVWVzdPUkdENGxTR1FRaWVkdzYzRGRMQjQ4bmJNblJ6SjJLTjlzXzgwbldXSi1YbmpUbHd4QnFMMFdXRmszVUh4d1FLYV9iLVZTUEx6YlhyNFZpS2hkRWNGdHpWa2QzR0YwOGw2WkRHaGxaU21ObXpvVkVoak9fSVpjald4aTF5VE1CbGhIemgtQ1VGREVGSlk1cmxXVHFPNE9ISkI1RFZ6VklxS2Npb2Z6Vy1LdDg0ME5kd0VwQ2ZsRWFvTmhHWUV0aEZWX2hIMDdWRDJaMDI2Yy1zc0tZY1p1V2o1Z2U1d3A5VTEzbDYxOWJlZjFxc19hOVJ6aXN2VnRGX3JsdTNWRGlGM1hYWERVbFloakRNcnlyUllwU1F3Vy1WWWJ6VTZtbENPaXpBRFBfMzk0a0lXRzZHam1CUkVCay1BcWRaU2NUV3EyeXp4Wl9mdlpkU1Q0bWFYWXRpM3pYTzhqOUk2TVhGZURNWmlTSGVzc1duSVkxamhocnBLaC1VckpZOG8yc3ZzcF9xbjB4OHh5S1ZKZC00UVJ3a0puRjFRaWU5aks1V1g5b2VtTGZxQ2xlUGNCS2RZcm03Z1pZSzJQS09HZ3hwRlU3ZjVjSWtqOS1FX3BFNFJTMmN1bVRBX2JSRkYtOWxlem5PWkpzVmFuSElWQzdKSjhPZnVNdGFOTVlZQnZORnhQVXVJdHNxUWx5aVY1eFI4b0NIZUlhTHY4NnJ3VzdGY1VlekhIVzk5Q3loNlFSSmxONnRDSG9RamFTVlpJdG5PM25LSQ==","email":"fdavalo@redhat.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLWNhYjNjYjMyLTZlZTMtNDkzNS05ZWY4LTgwODE1NGI1MWJmODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpNV1l3WWpsaU9HVXpOVGMwWkdKak9ETXhZamd4WXprd1lUTXlOekppWVNKOS5FU3d0WWl4eHgtUlpCUUl1VUhlTWMteUJQenl0QUpSa19ES0NEMlFnWnhKdERzZnVrOGFWdktNNklRRzZxbUd6UGlHTU5UUG9OemdJY3NNTWtSQmVPVUdzay00aDhLN1JIcUVWVzdPUkdENGxTR1FRaWVkdzYzRGRMQjQ4bmJNblJ6SjJLTjlzXzgwbldXSi1YbmpUbHd4QnFMMFdXRmszVUh4d1FLYV9iLVZTUEx6YlhyNFZpS2hkRWNGdHpWa2QzR0YwOGw2WkRHaGxaU21ObXpvVkVoak9fSVpjald4aTF5VE1CbGhIemgtQ1VGREVGSlk1cmxXVHFPNE9ISkI1RFZ6VklxS2Npb2Z6Vy1LdDg0ME5kd0VwQ2ZsRWFvTmhHWUV0aEZWX2hIMDdWRDJaMDI2Yy1zc0tZY1p1V2o1Z2U1d3A5VTEzbDYxOWJlZjFxc19hOVJ6aXN2VnRGX3JsdTNWRGlGM1hYWERVbFloakRNcnlyUllwU1F3Vy1WWWJ6VTZtbENPaXpBRFBfMzk0a0lXRzZHam1CUkVCay1BcWRaU2NUV3EyeXp4Wl9mdlpkU1Q0bWFYWXRpM3pYTzhqOUk2TVhGZURNWmlTSGVzc1duSVkxamhocnBLaC1VckpZOG8yc3ZzcF9xbjB4OHh5S1ZKZC00UVJ3a0puRjFRaWU5aks1V1g5b2VtTGZxQ2xlUGNCS2RZcm03Z1pZSzJQS09HZ3hwRlU3ZjVjSWtqOS1FX3BFNFJTMmN1bVRBX2JSRkYtOWxlem5PWkpzVmFuSElWQzdKSjhPZnVNdGFOTVlZQnZORnhQVXVJdHNxUWx5aVY1eFI4b0NIZUlhTHY4NnJ3VzdGY1VlekhIVzk5Q3loNlFSSmxONnRDSG9RamFTVlpJdG5PM25LSQ==","email":"fdavalo@redhat.com"}}}
+  type: kubernetes.io/dockerconfigjson
+install-config-secret.yaml: |
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name:  {{ .Values.cluster.name }}-install-config
+    namespace:  {{ .Values.cluster.name }}
+  type: Opaque
+  data:
+    install-config.yaml: @install-config@
+ssh-private-key.yaml: |
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name:  {{ .Values.cluster.name }}-ssh-private-key
+    namespace:  {{ .Values.cluster.name }}
+  stringData:
+    ssh-privatekey: |-
+    -----BEGIN RSA PRIVATE KEY-----
+    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
+    -----END RSA PRIVATE KEY-----
+  type: Opaque
+vsphere-creds.yaml: |
+  apiVersion: v1
+  kind: Secret
+  type: Opaque
+  metadata:
+    name:  {{ .Values.cluster.name }}-vsphere-creds
+    namespace:  {{ .Values.cluster.name }}
+  stringData:
+    username: @username@
+    password: @password@
+vsphere-certs.yaml: |
+  apiVersion: v1
+  kind: Secret
+  type: Opaque
+  metadata:
+    name:  {{ .Values.cluster.name }}-vsphere-certs
+    namespace:  {{ .Values.cluster.name }}
+  data:
+    .cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVOVENDQXgyZ0F3SUJBZ0l
