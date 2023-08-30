@@ -1,6 +1,8 @@
 apiVersion: cluster.open-cluster-management.io/v1
 kind: ManagedCluster
 metadata:
+  annotations:
+    "helm.sh/hook": post-install
   labels:
     cloud: vSphere
     name: {{ .Values.name }}
@@ -13,6 +15,8 @@ spec:
 apiVersion: hive.openshift.io/v1
 kind: MachinePool
 metadata:
+  annotations:
+    "helm.sh/hook": post-install
   name: {{ .Values.name }}-worker
   namespace: {{ .Values.name }}
 spec:
@@ -31,6 +35,8 @@ spec:
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
+  annotations:
+    "helm.sh/hook": post-install
   name: {{ .Values.name }}
   namespace: {{ .Values.name }}
 spec:
