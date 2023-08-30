@@ -1,0 +1,7 @@
+{
+    "name": "vc2",
+    "namespace": "vc2",
+    "cluster": "https://kubernetes.default.svc",
+    "api": "10.6.82.102",
+    "ingress": "10.6.82.102"
+}
