@@ -8,7 +8,7 @@ metadata:
     name: {{ .Values.name }}
     vendor: OpenShift
     cluster.open-cluster-management.io/clusterset: 'vc'
-  name: {{ .Values.name }}'
+  name: {{ .Values.name }}
 spec:
   hubAcceptsClient: true
 ---
