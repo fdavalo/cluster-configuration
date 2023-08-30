@@ -1,0 +1,14 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: copy-vcenter
+  namespace: open-cluster-management
+rules:
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+    resourceNames:
+      - vcenter
