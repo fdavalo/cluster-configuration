@@ -1,6 +1,8 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterDeployment
 metadata:
+  annotations:
+    "helm.sh/hook": post-install
   name: {{ .Values.name }}
   namespace: {{ .Values.name }}
   labels:
