@@ -18,6 +18,13 @@ data:
               storage: 10Gi
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: openshift-user-workload-monitoring
+---  
+apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
