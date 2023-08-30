@@ -1,0 +1,37 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: {{ .Values.cluster.name | quote }}
+  namespace: {{ .Values.cluster.name | quote }}
+  labels:
+    cloud: 'vSphere'
+    vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: 'vc'
+spec:
+  baseDomain: redhat.hpecic.net
+  clusterName: {{ .Values.cluster.name | quote }}
+  controlPlaneConfig:
+    servingCertificates: {}
+  provisioning:
+    installConfigSecretRef:
+      name: {{ .Values.cluster.name | quote }}-install-config
+    sshPrivateKeySecretRef:
+      name: {{ .Values.cluster.name | quote }}-ssh-private-key
+    imageSetRef:
+       #quay.io/openshift-release-dev/ocp-release:4.12.30-multi
+      name: img4.12.30-multi-appsub
+  platform:
+    vsphere:
+      cluster: HIT_RedHat
+      certificatesSecretRef:
+        name: {{ .Values.cluster.name | quote }}-vsphere-certs
+      credentialsSecretRef:
+        name: {{ .Values.cluster.name | quote }}-vsphere-creds
+      vCenter: hitvcenter.hybridit.hpecic.net
+      datacenter: HIT_RedHat
+      defaultDatastore: VV.HIT-RedHat
+      network: 'Openshift'
+  installAttemptsLimit: 1
+  installed: false
+  pullSecretRef:
+    name: {{ .Values.cluster.name | quote }}-pull-secret
