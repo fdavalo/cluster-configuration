@@ -1,0 +1,51 @@
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  labels:
+    cloud: vSphere
+    name: 'vc2'
+    vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: 'vc'
+  name: 'vc2'
+spec:
+  hubAcceptsClient: true
+---
+apiVersion: hive.openshift.io/v1
+kind: MachinePool
+metadata:
+  name: vc2-worker
+  namespace: 'vc2'
+spec:
+  clusterDeploymentRef:
+    name: 'vc2'
+  name: worker
+  platform:
+    vsphere:
+      cpus: 4
+      coresPerSocket: 2
+      memoryMB: 16384
+      osDisk:
+        diskSizeGB: 120
+  replicas: 3
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: 'vc2'
+  namespace: 'vc2'
+spec:
+  clusterName: 'vc2'
+  clusterNamespace: 'vc2'
+  clusterLabels:
+    cloud: vSphere
+    vendor: OpenShift
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
