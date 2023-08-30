@@ -1,0 +1,3 @@
+ressources:
+  - configap-monitoring.yaml
+  - configmap-userworkload.yaml
