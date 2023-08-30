@@ -18,7 +18,7 @@ spec:
      source:
        repoURL: https://github.com/fdavalo/cluster-configuration.git
        targetRevision: HEAD
-       path: "helm"
+       path: "applications/install-vc/helm"
        helm:
          parameters:
            - name: name
