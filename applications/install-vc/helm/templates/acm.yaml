@@ -3,21 +3,21 @@ kind: ManagedCluster
 metadata:
   labels:
     cloud: vSphere
-    name: 'vc2'
+    name: {{ .Values.cluster.name }}
     vendor: OpenShift
     cluster.open-cluster-management.io/clusterset: 'vc'
-  name: 'vc2'
+  name: {{ .Values.cluster.name }}'
 spec:
   hubAcceptsClient: true
 ---
 apiVersion: hive.openshift.io/v1
 kind: MachinePool
 metadata:
-  name: vc2-worker
-  namespace: 'vc2'
+  name: {{ .Values.cluster.name }}-worker
+  namespace: {{ .Values.cluster.name }}
 spec:
   clusterDeploymentRef:
-    name: 'vc2'
+    name: {{ .Values.cluster.name }}
   name: worker
   platform:
     vsphere:
@@ -31,11 +31,11 @@ spec:
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
-  name: 'vc2'
-  namespace: 'vc2'
+  name: {{ .Values.cluster.name }}
+  namespace: {{ .Values.cluster.name }}
 spec:
-  clusterName: 'vc2'
-  clusterNamespace: 'vc2'
+  clusterName: {{ .Values.cluster.name }}
+  clusterNamespace: {{ .Values.cluster.name }}
   clusterLabels:
     cloud: vSphere
     vendor: OpenShift
