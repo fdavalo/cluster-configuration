@@ -16,3 +16,20 @@ data:
           resources:
             requests:
               storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  name: user-workload-monitoring-config
+  namespace: openshift-user-workload-monitoring
+data:
+  config.yaml: |
+    prometheus:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: thin
+          resources:
+            requests:
+              storage: 10Gi
