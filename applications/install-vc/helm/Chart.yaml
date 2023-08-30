@@ -1,0 +1,4 @@
+apiVersion: v1
+description: 'Cluster As A Service'
+name: vc-aas
+version: 0.1.0
