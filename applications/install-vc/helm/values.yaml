@@ -1,5 +1,5 @@
 cluster: 
-  name: vcz
+  name: vc2
   vips:
-    api: 10.6.82.x
-    ingress: 10.6.82.y
+    api: 10.6.82.101
+    ingress: 10.6.82.102
