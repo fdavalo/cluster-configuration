@@ -97,6 +97,22 @@ data:
     data:
       .cacert: @cacertificate-b64@
 ---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: generates
+  namespace: {{ .Values.name }}
+rules:
+  - verbs:
+      - get
+      - update
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+      - configmaps
+---      
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
