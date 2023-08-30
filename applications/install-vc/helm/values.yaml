@@ -1,4 +1,5 @@
-name: vcz
-vips:
-  api: 10.6.82.x
-  ingress: 10.6.82.y
+cluster: 
+  name: vcz
+  vips:
+    api: 10.6.82.x
+    ingress: 10.6.82.y
