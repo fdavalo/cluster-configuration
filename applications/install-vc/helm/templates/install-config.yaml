@@ -1,0 +1,47 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: install-config-cm
+  namespace: {{ .Values.cluster.name }}
+data: |
+  apiVersion: v1
+  metadata:
+    name: {{ .Values.cluster.name }}
+  baseDomain: redhat.hpecic.net
+  controlPlane:
+    hyperthreading: Enabled
+    name: master
+    replicas: 3
+    platform:
+      vsphere:
+        cpus:  4
+        coresPerSocket:  2
+        memoryMB:  16384
+        osDisk:
+          diskSizeGB: 120
+  compute:
+  - hyperthreading: Enabled
+    name: 'worker'
+    replicas: 3
+    platform:
+      vsphere:
+        cpus:  4
+        coresPerSocket:  2
+        memoryMB:  16384
+        osDisk:
+          diskSizeGB: 120
+  platform:
+    vsphere:
+      vCenter: hitvcenter.hybridit.hpecic.net
+      username: @username@
+      password: @password@
+      datacenter: HIT_RedHat
+      defaultDatastore: VV.HIT-RedHat
+      cluster: HIT_RedHat
+      apiVIP: {{ .Values.cluster.vips.api }}
+      ingressVIP: {{ .Values.cluster.vips.ingress }}
+      network: 'Openshift'
+  pullSecret: @pullSecret@
+  sshKey: |-
+    @sshKey@
+  imageContentSources:
