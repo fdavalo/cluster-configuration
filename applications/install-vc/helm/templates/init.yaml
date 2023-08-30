@@ -91,3 +91,4 @@ data:
       namespace:  {{ .Values.cluster.name }}
     data:
       .cacert: @cacertificate-b64@
+-
