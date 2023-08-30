@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+ name: install-vc
+ namespace: openshift-gitops
+spec:
+ generators:
+ - git:
+     repoURL: https://github.com/fdavalo/cluster-configuration.git
+     revision: HEAD
+     files:
+     - path: "applications/install-vc/instances/**/config.json"
+ template:
+   metadata:
+     name: '{{name}}-install-vc'
+   spec:
+     project: default
+     source:
+       repoURL: https://github.com/fdavalo/cluster-configuration.git
+       targetRevision: HEAD
+       path: "helm"
+       helm:
+         parameters:
+           - name: name
+             value: '{{name}}'       
+           - name: api
+             value: '{{api}}'       
+           - name: ingress
+             value: '{{ingress}}'       
+     destination:
+       server: '{{cluster}}'
+       namespace: '{{namespace}}'
+     syncPolicy: {}
