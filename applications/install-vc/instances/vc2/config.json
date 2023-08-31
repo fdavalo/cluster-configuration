@@ -2,6 +2,6 @@
     "name": "vc2",
     "namespace": "vc2",
     "cluster": "https://kubernetes.default.svc",
-    "api": "10.6.82.102",
+    "api": "10.6.82.101",
     "ingress": "10.6.82.102"
 }
