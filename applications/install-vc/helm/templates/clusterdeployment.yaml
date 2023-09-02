@@ -32,6 +32,5 @@ spec:
       defaultDatastore: VV.HIT-RedHat
       network: 'Openshift'
   installAttemptsLimit: 1
-  installed: false
   pullSecretRef:
     name: {{ .Values.name }}-pull-secret
