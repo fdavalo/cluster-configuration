@@ -33,5 +33,5 @@ spec:
              value: '{{version}}'                
      destination:
        server: '{{cluster}}'
-       namespace: '{{namespace}}'
+       namespace: '{{name}}'
      syncPolicy: {}
