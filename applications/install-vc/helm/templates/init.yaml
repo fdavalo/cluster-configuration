@@ -28,7 +28,7 @@ data:
     compute:
     - hyperthreading: Enabled
       name: 'worker'
-      replicas: 3
+      replicas: {{ .Values.workers }}
       platform:
         vsphere:
           cpus:  4
