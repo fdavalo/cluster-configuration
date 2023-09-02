@@ -32,6 +32,6 @@ spec:
            - name: version
              value: '{{version}}'                
      destination:
-       server: '{{cluster}}'
+       server: 'https://kubernetes.default.svc'
        namespace: '{{name}}'
      syncPolicy: {}
