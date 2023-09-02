@@ -2,12 +2,18 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ .Values.name }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-5"    
 ---  
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: data-cm
   namespace: {{ .Values.name }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-2"      
 data:
   install-config.yaml: |
     apiVersion: v1
@@ -102,6 +108,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: generates
   namespace: {{ .Values.name }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-4"    
 rules:
   - verbs:
       - get
@@ -118,6 +127,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: generates
   namespace: {{ .Values.name }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-3"   
 subjects:
   - kind: ServiceAccount
     name: default
@@ -131,6 +143,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: copy-vcenter
   namespace: open-cluster-management
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-3"    
 subjects:
   - kind: ServiceAccount
     name: default
