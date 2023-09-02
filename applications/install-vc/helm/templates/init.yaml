@@ -141,7 +141,7 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: copy-vcenter
+  name: copy-vcenter-{{ .Values.name }}
   namespace: open-cluster-management
   annotations:
     "helm.sh/hook": pre-install
