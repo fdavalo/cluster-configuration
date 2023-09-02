@@ -17,6 +17,7 @@ kind: MachinePool
 metadata:
   annotations:
     "helm.sh/hook": post-install
+    argocd.argoproj.io/sync-options: ServerSideApply=true    
   name: {{ .Values.name }}-worker
   namespace: {{ .Values.name }}
 spec:
@@ -30,7 +31,7 @@ spec:
       memoryMB: 16384
       osDisk:
         diskSizeGB: 120
-  replicas: 3
+  replicas: {{ .Values.workers }}
 ---
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
