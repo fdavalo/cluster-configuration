@@ -26,7 +26,9 @@ spec:
            - name: api
              value: '{{api}}'       
            - name: ingress
-             value: '{{ingress}}'       
+             value: '{{ingress}}'
+           - name: workers
+             value: '{{workers}}'              
      destination:
        server: '{{cluster}}'
        namespace: '{{namespace}}'
