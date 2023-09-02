@@ -22,7 +22,7 @@ spec:
       name: {{ .Values.name }}-ssh-private-key
     imageSetRef:
        #quay.io/openshift-release-dev/ocp-release:4.12.30-multi
-      name: img4.12.30-multi-appsub
+      name: img{{ .Values.version }}-multi-appsub
   platform:
     vsphere:
       cluster: HIT_RedHat
