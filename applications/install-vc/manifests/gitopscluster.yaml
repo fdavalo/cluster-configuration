@@ -1,0 +1,47 @@
+apiVersion: apps.open-cluster-management.io/v1beta1
+kind: GitOpsCluster
+metadata:
+  creationTimestamp: '2023-08-30T14:24:52Z'
+  generation: 1
+  managedFields:
+    - apiVersion: apps.open-cluster-management.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:argoServer':
+            .: {}
+            'f:argoNamespace': {}
+            'f:cluster': {}
+          'f:placementRef':
+            .: {}
+            'f:apiVersion': {}
+            'f:kind': {}
+            'f:name': {}
+      manager: Mozilla
+      operation: Update
+      time: '2023-08-30T14:24:52Z'
+    - apiVersion: apps.open-cluster-management.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          .: {}
+          'f:lastUpdateTime': {}
+          'f:message': {}
+          'f:phase': {}
+      manager: gitopscluster
+      operation: Update
+      subresource: status
+      time: '2023-09-02T14:35:40Z'
+  name: gitops-cluster-vc
+  namespace: openshift-gitops
+  resourceVersion: '3817289213'
+  uid: 7a566303-4c08-481d-80e8-cfd3bfe87b25
+spec:
+  argoServer:
+    argoNamespace: openshift-gitops
+    cluster: local-cluster
+  placementRef:
+    apiVersion: cluster.open-cluster-management.io/v1alpha1
+    kind: Placement
+    name: vc-clusters
