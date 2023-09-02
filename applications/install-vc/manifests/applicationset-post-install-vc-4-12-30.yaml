@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: post-install-vc-4-12-30
+  namespace: openshift-gitops
+spec:
+  generators:
+    - matrix:
+        generators:
+          - git:
+              directories:
+                - path: applications/post-install-vc/4.12.30/*
+              repoURL: 'https://github.com/fdavalo/cluster-configuration'
+              revision: main
+          - clusterDecisionResource:
+              configMapRef: acm-placement
+              labelSelector:
+                matchLabels:
+                  cluster.open-cluster-management.io/placement: vc-clusters-4-12-30
+  template:
+    metadata:
+      name: '{{name}}-post-install-vc-{{path.basename}}'
+    spec:
+      destination:
+        name: '{{clusterName}}'
+        namespace: '{{path.basename}}'
+      project: dev
+      source:
+        path: '{{path}}'
+        repoURL: 'https://github.com/fdavalo/cluster-configuration'
+        targetRevision: main
+      syncPolicy: {}
