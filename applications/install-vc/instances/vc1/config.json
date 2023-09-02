@@ -4,5 +4,6 @@
     "cluster": "https://kubernetes.default.svc",
     "api": "10.6.82.12",
     "ingress": "10.6.82.13",
-    "workers": 2
+    "workers": 2,
+    "version": "4.12.30"
 }
