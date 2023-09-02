@@ -1,3 +1,4 @@
 name: vc2
 api: 10.6.82.101
 ingress: 10.6.82.102
+workers: 3
