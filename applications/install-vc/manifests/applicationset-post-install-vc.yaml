@@ -10,6 +10,8 @@ spec:
           - git:
               directories:
                 - path: applications/post-install-vc/*
+                - path: applications/post-install-vc/4*
+                  exclude: true                
               repoURL: 'https://github.com/fdavalo/cluster-configuration'
               revision: main
           - clusterDecisionResource:
