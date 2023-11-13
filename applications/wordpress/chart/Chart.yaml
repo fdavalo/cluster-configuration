@@ -15,7 +15,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     tags:
       - bitnami-common
-    version: 1.x.x
+    version: 2.x.x
   - name: wordpress
     repository: https://charts.bitnami.com/bitnami
     version: 14.x.x    
